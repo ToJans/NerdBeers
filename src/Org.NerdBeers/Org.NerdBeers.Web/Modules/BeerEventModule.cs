@@ -8,18 +8,25 @@ using Org.NerdBeers.Web.Models;
 
 namespace Org.NerdBeers.Web.Modules
 {
-    public class MainModule : NerdBeerModule
+    public class BeerEventModule : NerdBeerModule
     {
-        public MainModule()
+        public BeerEventModule() : base("/BeerEvents")
         {
             Get["/"] = x =>
             {
                 IEnumerable<dynamic> model = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
                 model = model.OrderBy(e=>e.EventDate).Take(10);
-                return View["index",model.ToArray()];
+                return View["beerevent_index", model.ToArray()];
             };
 
-            Post["/NerdBeers"] = x =>
+            Get["/{Id}"] = x =>
+            {
+                int id = x.Id;
+                BeerEvent model = DB.BeerEvents.FindById(id);
+                return View["beerevent_detail", model];
+            };
+
+            Post["/"] = x =>
             {
                 var model = new BeerEvent{
                     Name = Request.Form.Name,
@@ -28,10 +35,12 @@ namespace Org.NerdBeers.Web.Modules
                 };
 
                 int res = DB.BeerEvents.Insert(model).Id;
-                return Response.AsRedirect("/NerdBeers/"+res.ToString());
+                return Response.AsRedirect("/BeerEvents/" + res.ToString());
             };
 
-            Post["/NerdBeers/{Id}"] = x =>
+
+            // PUT does not work in ASP.NET ?
+            Post["/{Id}"] = x =>
             {
                 var model = new BeerEvent
                 {
@@ -41,15 +50,9 @@ namespace Org.NerdBeers.Web.Modules
                     EventDate = Request.Form.EventDate
                 };
                 DB.BeerEvents.Update(model);
-                return Response.AsRedirect("/NerdBeers/"+model.Id.ToString());
+                return Response.AsRedirect("/BeerEvents/" + model.Id.ToString());
             };
 
-            Get["/NerdBeers/{Id}"] = x =>
-            {
-                int id = x.Id;
-                BeerEvent model = DB.BeerEvents.FindById(id);
-                return View["detail",model];
-            };
         }
     }
 }
