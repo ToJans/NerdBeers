@@ -13,6 +13,7 @@
       <input type="text" name="EventDate" value="${Model.EventDate}"/>
       <input type="submit"/>
     </form>
+    <img src="http://maps.google.com/maps/api/staticmap?center=${Model.Location}&zoom=14&size=480x480&markers=color:red&sensor=false" />
     <a href="/">Go back</a>
   </body>
 </html>
