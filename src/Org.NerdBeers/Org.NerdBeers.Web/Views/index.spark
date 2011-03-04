@@ -1,0 +1,26 @@
+﻿<viewdata model="dynamic[]"/>
+<html>
+  <head>
+    <title>Razor View Engine Demo</title>
+  </head>
+  <body>
+    <h1>Nerdbeers overview</h1>
+    <p>Upcoming Nerdbeers:</p>
+    <ul>
+      <li each="var v in Model">
+        <a href="nerdbeers/${v.Id}"> ${v.Name} - ${v.Location} </a> ${v.EventDate}
+      </li>
+    </ul>
+
+    <h2>Add another</h2>
+    <form method="POST" action="/nerdbeers">
+      <label for="Name">Name</label>
+      <input type="text" name="Name" />
+      <label for="Location">Location</label>
+      <input type="text" name="Location" />
+      <label for="EventDate">Date</label>
+      <input type="text" name="EventDate" value="${System.DateTime.Now}"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>
