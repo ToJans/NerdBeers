@@ -11,6 +11,5 @@ namespace Org.NerdBeers.Web.Models
         public string Name { get; set; }
         public string Location { get; set; }
         public DateTime EventDate { get; set; }
-
     }
 }

@@ -4,7 +4,7 @@
     <title>Nerdbeer ${Model.Name}</title>
   </head>
   <body>
-    <form method="POST" action="/nerdbeers/${Model.Id}">
+    <form method="POST" action="/BeerEvents/${Model.Id}">
       <label for="Name">Name</label>
       <input type="text" name="Name" value="${Model.Name}"/>
       <label for="Location">Location</label>
