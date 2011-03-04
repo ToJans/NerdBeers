@@ -52,7 +52,6 @@ namespace Org.NerdBeers.Web.Modules
                 DB.BeerEvents.Update(model);
                 return Response.AsRedirect("/BeerEvents/" + model.Id.ToString());
             };
-
         }
     }
 }

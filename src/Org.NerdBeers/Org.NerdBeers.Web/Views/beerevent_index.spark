@@ -1,7 +1,7 @@
 ﻿<viewdata model="dynamic[]"/>
 <html>
   <head>
-    <title>Razor View Engine Demo</title>
+    <title>Nerdbeers overview</title>
   </head>
   <body>
     <h1>Nerdbeers overview</h1>

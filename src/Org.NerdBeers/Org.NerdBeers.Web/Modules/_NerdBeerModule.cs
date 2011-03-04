@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Nancy;
 using System.Configuration;
+using System.Data.SqlServerCe;
+using System.Data;
 
 namespace Org.NerdBeers.Web.Modules
 {
@@ -26,6 +28,7 @@ namespace Org.NerdBeers.Web.Modules
                 }
             }
         }
+
 
         public NerdBeerModule()
             : base()
