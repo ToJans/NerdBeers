@@ -108,9 +108,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Views\beerevent_index.spark" />
+    <None Include="Views\beerevent_index.spark">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\beerevent_detail.spark">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
