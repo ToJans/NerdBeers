@@ -57,6 +57,9 @@
     <Reference Include="Simple.Data.SqlCe40">
       <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.SqlCe40.dll</HintPath>
     </Reference>
+    <Reference Include="Simple.Data.SqlServer">
+      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Spark">
       <HintPath>..\..\Dependencies\Nancy\Spark.dll</HintPath>
     </Reference>
