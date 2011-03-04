@@ -24,7 +24,7 @@ namespace Org.NerdBeers.Web.Modules
                 }
                 else
                 {
-                    return Simple.Data.Database.OpenConnection(s.ConnectionString);
+                    return Simple.Data.Database.OpenConnection("NerdBeers");
                 }
             }
         }
