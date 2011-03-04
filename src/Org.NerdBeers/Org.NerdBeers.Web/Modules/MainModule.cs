@@ -16,7 +16,7 @@ namespace Org.NerdBeers.Web.Modules
             {
                 IEnumerable<dynamic> model = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
                 model = model.OrderBy(e=>e.EventDate).Take(10);
-                return View["views/index",model.ToArray()];
+                return View["index",model.ToArray()];
             };
 
             Post["/NerdBeers"] = x =>
@@ -48,7 +48,7 @@ namespace Org.NerdBeers.Web.Modules
             {
                 int id = x.Id;
                 BeerEvent model = DB.BeerEvents.FindById(id);
-                return View["views/detail",model];
+                return View["detail",model];
             };
         }
     }
