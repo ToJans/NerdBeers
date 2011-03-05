@@ -72,6 +72,8 @@
       <HintPath>..\..\Dependencies\SqlServerCE4\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -88,7 +90,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -102,6 +106,7 @@
     </Compile>
     <Compile Include="Models\BeerEvent.cs" />
     <Compile Include="Modules\BeerEventModule.cs" />
+    <Compile Include="Modules\UtopiaBeerEventModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\_NerdBeerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
