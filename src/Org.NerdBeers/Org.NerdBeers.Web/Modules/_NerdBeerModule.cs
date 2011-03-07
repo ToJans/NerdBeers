@@ -12,7 +12,7 @@ namespace Org.NerdBeers.Web.Modules
 
         protected IRepository repo;
 
-        public NerdBeerModule(IRepository repo)
+        public NerdBeerModule(Repository repo)
             : base()
         {
             this.repo = repo;

@@ -10,7 +10,7 @@ namespace Org.NerdBeers.Web.Modules
 {
     public class BeerEventModule : NerdBeerModule
     {
-        public BeerEventModule(IRepository repo)
+        public BeerEventModule(Repository repo)
             : base("/BeerEvents", repo)
         {
             Get["/"] = x =>

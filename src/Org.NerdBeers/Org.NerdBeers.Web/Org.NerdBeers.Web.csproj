@@ -109,9 +109,6 @@
     </Compile>
     <Compile Include="Models\BeerEvent.cs" />
     <Compile Include="Models\Nerd.cs" />
-    <Compile Include="Services\NerdBeersBootstrapper.cs" />
-    <Compile Include="Modules\UserModule.cs" />
-    <Compile Include="Modules\UtopiaBeerEventModule.cs" />
     <Compile Include="Modules\BeerEventModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\_NerdBeerModule.cs" />

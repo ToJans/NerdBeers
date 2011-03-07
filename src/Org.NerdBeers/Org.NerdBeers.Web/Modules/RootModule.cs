@@ -9,7 +9,7 @@ namespace Org.NerdBeers.Web.Modules
 {
     public class RootModule: NerdBeerModule 
     {
-        public RootModule(IRepository repo) : base(repo)
+        public RootModule(Repository repo) : base(repo)
         {
             Get["/"] = x => Show(@"root_index");
 
