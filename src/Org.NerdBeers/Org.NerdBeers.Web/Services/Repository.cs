@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Simple.Data;
+using Org.NerdBeers.Web.Models;
 
 namespace Org.NerdBeers.Web.Services
 {
@@ -10,38 +11,42 @@ namespace Org.NerdBeers.Web.Services
     {
         const int DefaultPageAmount = 10;
 
-        public dynamic[] GetNerdsLike(string namepart, int amount = DefaultPageAmount)
+        public Nerd[] GetNerdsLike(string namepart, int amount = DefaultPageAmount)
         {
             string namelike = string.Format("*{0}*", namepart);
-            IEnumerable<dynamic> model = DB.Nerds.FindAll(DB.Users.Name.Like(namelike));
-            return model.OrderBy(e => e.Name).Take(amount).ToArray();
+            var l = new List<Nerd>();
+            foreach (var q in DB.Nerds.FindAll(DB.Users.Name.Like(namelike)))                
+                l.Add((Nerd)q);
+            return l.OrderBy(e => e.Name).Take(amount).ToArray();
         }
 
-        public dynamic[] GetUpComingBeerEvents(int amount = DefaultPageAmount)
+        public BeerEvent[] GetUpComingBeerEvents(int amount = DefaultPageAmount)
         {
-            IEnumerable<dynamic> model = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
-            return model.OrderBy(e => e.EventDate).Take(amount).ToArray();
+            var l = new List<BeerEvent>();
+            foreach (var q in DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))))
+                l.Add((BeerEvent)q);
+            return l.OrderBy(e => e.EventDate).Take(amount).ToArray<BeerEvent>();
         }
 
-        public dynamic[] GetBeerEventSubscribers(int id)
+        public Nerd[] GetBeerEventSubscribers(int id)
         {
-            var l = new List<dynamic>();
+            var l = new List<Nerd>();
             foreach (var subscr in DB.NerdSubscriptions.FindAllByEventId(id))
             {
-                l.Add(DB.Nerds.FindById(subscr.NerdId));
+                l.Add((Nerd)DB.Nerds.FindById(subscr.NerdId));
             }
             return l.ToArray();
         }
 
-        public dynamic[] GetSubscribedEvents(string NerdGuid)
+        public BeerEvent[] GetSubscribedEvents(string NerdGuid)
         {
-            var l = new List<dynamic>();
+            var l = new List<BeerEvent>();
             if (string.IsNullOrEmpty(NerdGuid)) return l.ToArray();
             var n = DB.Nerds.FindByGuid(NerdGuid);
             if (n == null) return l.ToArray();
             foreach (var subscr in DB.NerdSubscriptions.FindAllByNerdId(n.Id))
             {
-                l.Add(DB.BeerEvents.FindById(subscr.EventId));
+                l.Add((BeerEvent)DB.BeerEvents.FindById(subscr.EventId));
             }
             return l.ToArray();
         }
