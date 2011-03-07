@@ -90,7 +90,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Content\MainLayout.css" />
+    <Content Include="Content\MainLayout.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -118,24 +120,24 @@
     <Compile Include="Services\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\shared\application.spark">
+    <Content Include="Views\shared\application.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\beerevents_index.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Views\beerevents_detail.spark">
+    <Content Include="Views\beerevents_detail.spark">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\root_index.spark">
+    <Content Include="Views\root_index.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
