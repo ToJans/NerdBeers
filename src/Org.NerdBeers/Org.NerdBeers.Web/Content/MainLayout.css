@@ -1,0 +1,24 @@
+﻿body
+{
+}
+
+#sidebar
+{
+    display: block;
+    float: left;
+    border: 1px solid black;
+    width: 220px;
+}
+#sidebar label
+{
+    display: inline-block;
+    width: 200px;
+}
+
+#othersidebar
+{
+    display: block;
+    float: right;
+    border: 1px solid black;
+    width: 220px;
+}

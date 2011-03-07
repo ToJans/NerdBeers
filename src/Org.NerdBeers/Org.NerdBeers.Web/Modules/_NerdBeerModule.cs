@@ -1,43 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Dynamic;
 using Nancy;
-using System.Configuration;
-using System.Data.SqlServerCe;
-using System.Data;
+using Org.NerdBeers.Web.Services;
+
 
 namespace Org.NerdBeers.Web.Modules
 {
     public abstract class NerdBeerModule : NancyModule
     {
-        public dynamic DB
-        {
-            get
-            {
-                var c = System.Web.HttpContext.Current;
-                var s = ConfigurationManager.ConnectionStrings["NerdBeers"];
+     
+        public dynamic Model = new ExpandoObject();
 
-                if (string.IsNullOrWhiteSpace(s.ConnectionString))
-                {
-                    return Simple.Data.Database.OpenFile(c.Server.MapPath("~/App_data/Nerdbeers.sdf"));
-                }
-                else
-                {
-                    return Simple.Data.Database.OpenConnection(s.ConnectionString);
-                }
-            }
-        }
+        protected IRepository repo;
 
-
-        public NerdBeerModule()
+        public NerdBeerModule(IRepository repo)
             : base()
-        { 
+        {
+            this.repo = repo;
+            SetupModelDefaults();
         }
 
-        public NerdBeerModule(string modulepath)
+        public dynamic Show(string viewname)
+        {
+            return View[viewname, Model];
+        }
+
+        public NerdBeerModule(string modulepath, IRepository repo)
             : base(modulepath)
         {
+            this.repo = repo;
+            SetupModelDefaults();
         }
+
+        private void SetupModelDefaults()
+        {
+            Before.AddItemToEndOfPipeline(ctx =>
+            {
+                Model.UpcomingEvents = repo.GetUpComingBeerEvents(10);
+                Model.SubscribedEvents = repo.GetSubscribedEvents(Session["NerdGuid"] as string);
+                Model.Title = "NerdBeers";
+                return null;
+            });
+        }
+
     }
 }

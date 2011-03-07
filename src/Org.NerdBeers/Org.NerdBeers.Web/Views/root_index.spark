@@ -1,0 +1,10 @@
+﻿<content name="body">
+  
+<h1>Welcome to the NerdBeers site</h1>
+  <p>This is a site where one can easily organize a beer night for nerds.</p>
+  <p>The complete sourcecode is available <a href="http://github.com/tojans/NerdBeers" target="_blank">
+    over at github</a>.</p>
+  <h3>Attention !</h3>
+  <p>This piece of software is a WIP; currently the only way to change your subscriptions is by a local cookie. If you delete your cookie or try 
+  it on another machine, you will not be able to alter your old subscriptions...</p>
+</content>

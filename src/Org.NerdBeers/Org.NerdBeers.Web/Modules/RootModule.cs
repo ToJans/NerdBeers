@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Nancy;
+using Org.NerdBeers.Web.Services;
 
 namespace Org.NerdBeers.Web.Modules
 {
-    public class RootModule: NancyModule
+    public class RootModule: NerdBeerModule 
     {
-        public RootModule()
+        public RootModule(IRepository repo) : base(repo)
         {
-            Get["/"] = x => Response.AsRedirect("/BeerEvents");
+            Get["/"] = x => Show(@"root_index");
+
+            Get["/style/{filename}"]= x => Response.AsCss("Content/"+ (string)x.filename);
+
+            Get["/scripts/{file}"] = x => Response.AsJs("Content/" + (string)x.file);
+
+
         }
     }
 }
