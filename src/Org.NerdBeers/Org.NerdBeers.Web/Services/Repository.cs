@@ -12,57 +12,44 @@ namespace Org.NerdBeers.Web.Services
     {
         const int DefaultPageAmount = 10;
 
-        public Nerd[] GetNerdsLike(string namepart, int amount = DefaultPageAmount)
+        public IEnumerable<Nerd> GetNerdsLike(string namepart, int amount = DefaultPageAmount)
         {
             string namelike = string.Format("*{0}*", namepart);
-            var l = new List<Nerd>();
-            foreach (var q in DB.Nerds.FindAll(DB.Users.Name.Like(namelike)))                
-                l.Add((Nerd)q);
-            return l.OrderBy(e => e.Name).Take(amount).ToArray();
+            IEnumerable<Nerd> l = DB.Nerds.FindAll(DB.Users.Name.Like(namelike)).Cast<Nerd>();
+            return l.OrderBy(e => e.Name).Take(amount);
         }
 
-        public BeerEvent[] GetUpComingBeerEvents(int amount = DefaultPageAmount)
+        public IEnumerable<BeerEvent> GetUpComingBeerEvents(int amount = DefaultPageAmount)
         {
-            var l = new List<BeerEvent>();
-            foreach (var q in DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))))
-                l.Add((BeerEvent)q);
-            return l.OrderBy(e => e.EventDate).Take(amount).ToArray<BeerEvent>();
+            IEnumerable<BeerEvent> l =
+                DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
+            return l.OrderBy(e => e.EventDate).Take(amount);
         }
 
-        public Nerd[] GetBeerEventSubscribers(int id)
+        public IEnumerable<Nerd> GetBeerEventSubscribers(int id)
         {
-            var l = new List<Nerd>();
-            foreach (var subscr in DB.NerdSubscriptions.FindAllByEventId(id))
-            {
-                l.Add((Nerd)DB.Nerds.FindById(subscr.NerdId));
-            }
-            return l.ToArray();
+            // Use implicit joining from Simple.Data
+            return DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).Cast<Nerd>(); // Cast<T> method is on SimpleResultSet
         }
 
-        public BeerEvent[] GetSubscribedEvents(string NerdGuid)
+        public IEnumerable<BeerEvent> GetSubscribedEvents(string NerdGuid)
         {
-            var l = new List<BeerEvent>();
-            if (string.IsNullOrEmpty(NerdGuid)) return l.ToArray();
-            var n = DB.Nerds.FindByGuid(NerdGuid);
-            if (n == null) return l.ToArray();
-            foreach (var subscr in DB.NerdSubscriptions.FindAllByNerdId(n.Id))
-            {
-                l.Add((BeerEvent)DB.BeerEvents.FindById(subscr.EventId));
-            }
-            return l.ToArray();
+            if (string.IsNullOrEmpty(NerdGuid)) return Enumerable.Empty<BeerEvent>();
+
+            // Use implicit joining from Simple.Data
+            return
+                DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == NerdGuid).Cast<BeerEvent>();
         }
 
-        public dynamic[] GetBeerEventComments(int id)
+        public IEnumerable<dynamic> GetBeerEventComments(int id)
         {
-            var l = new List<dynamic>();
             foreach (var ec in DB.Comments.FindAllByEventId(id))
             {
                 dynamic d = new ExpandoObject();
                 d.Comment = ec;
-                d.Nerd = DB.Nerds.FindById((int)ec.NerdId);
-                l.Add(d);
+                d.Nerd = ec.Nerd; // Use implicit lazy-loading from Simple.Data
+                yield return d;
             }
-            return l.ToArray();
         }
 
 

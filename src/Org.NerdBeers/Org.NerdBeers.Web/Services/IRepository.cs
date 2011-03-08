@@ -9,10 +9,10 @@ namespace Org.NerdBeers.Web.Services
     public interface IRepository
     {
         dynamic DB { get; }
-        Nerd[] GetNerdsLike(string namepart, int amount );
-        BeerEvent[] GetUpComingBeerEvents(int amount );
-        Nerd[] GetBeerEventSubscribers(int id);
-        BeerEvent[] GetSubscribedEvents(string Guid);
-        dynamic[] GetBeerEventComments(int id);
+        IEnumerable<Nerd> GetNerdsLike(string namepart, int amount );
+        IEnumerable<BeerEvent> GetUpComingBeerEvents(int amount );
+        IEnumerable<Nerd> GetBeerEventSubscribers(int id);
+        IEnumerable<BeerEvent> GetSubscribedEvents(string Guid);
+        IEnumerable<dynamic> GetBeerEventComments(int id);
     }
 }
