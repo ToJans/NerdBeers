@@ -13,5 +13,6 @@ namespace Org.NerdBeers.Web.Services
         BeerEvent[] GetUpComingBeerEvents(int amount );
         Nerd[] GetBeerEventSubscribers(int id);
         BeerEvent[] GetSubscribedEvents(string Guid);
+        dynamic[] GetBeerEventComments(int id);
     }
 }

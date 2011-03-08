@@ -24,15 +24,16 @@ namespace Org.NerdBeers.Web.Modules
                 int id = x.Id;
                 Model.BeerEvent = repo.DB.BeerEvents.FindById(id);
                 Model.Subscribers = repo.GetBeerEventSubscribers(id);
-                Session["NerdGuid"] = Model.NerdGuid = (Session["NerdGuid"] as string) ?? Guid.NewGuid().ToString();
-                var n = repo.DB.Nerds.FindByGuid(Model.NerdGuid);
-                Model.NerdName = (n == null) ? "John Doe" : n.Name;
+                var n = GetCurrentNerd();
+                Model.NerdName = n.Name;
+                Model.NerdGuid = n.Guid;
                 Model.CanSubscribe = true;
                 Model.CanEdit = true;
+                Model.Comments = repo.GetBeerEventComments(id);
                 foreach (var sn in Model.Subscribers)
                 {
                     Model.CanEdit = false;
-                    if (sn.Guid == Model.NerdGuid)
+                    if (sn.Guid == n.Guid)
                     {
                         Model.CanSubscribe = false;
                         break;
@@ -54,22 +55,37 @@ namespace Org.NerdBeers.Web.Modules
                 return Response.AsRedirect("/BeerEvents/single/" + res.ToString());
             };
 
+            Post["/{Id}/comments/insert"] = x =>
+            {
+                var model = new Comment 
+                {
+                    NerdId = GetCurrentNerd().Id,
+                    EventId = (int)x.Id,
+                    CommentText = Request.Form.Comment,
+                    Created = DateTime.Now
+                };
+                repo.DB.Comments.Insert(model);
+                return Response.AsRedirect("/BeerEvents/single/" + (string)x.Id);
+            };
+
+            Get["/comments/delete/{Id}"] = x =>
+            {
+                var n = GetCurrentNerd();
+                var cmt = repo.DB.Comments.FindById((int)x.Id);
+                var id = (int)cmt.EventId;
+                if (cmt.NerdId ==n.Id)
+                {
+                    repo.DB.Comments.DeleteById((int)x.Id);
+                }
+                return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
+            };
+
+
             Post["/Subscribe/{eventid}"] = x =>
             {
-                string guid = Request.Form.Guid;
-                Nerd n = repo.DB.Nerds.FindByGuid(guid);
-                bool shouldinsert = false;
-                if (n == null)
-                {
-                    n = new Nerd();
-                    shouldinsert = true;
-                    n.Guid = guid;
-                }
+                Nerd n = GetCurrentNerd();
                 n.Name = Request.Form.Name;
-                if (shouldinsert)
-                    n = repo.DB.Nerds.Insert(n);
-                else
-                    repo.DB.Nerds.UpdateById(n);
+                repo.DB.Nerds.UpdateById(n);
                 repo.DB.NerdSubscriptions.Insert(NerdId: n.Id, EventId: (int)x.eventid);
                 return Response.AsRedirect("/BeerEvents/single/" + (string)x.eventid);
             };
@@ -90,6 +106,7 @@ namespace Org.NerdBeers.Web.Modules
                 IEnumerable<dynamic> subs = repo.DB.NerdSubscriptions.FindAllByEventId((int)x.eventid);
                 if (!subs.Any())
                 {
+                    repo.DB.Comments.DeleteByEventId((int)x.eventid);
                     repo.DB.BeerEvents.DeleteById((int)x.eventid);
                 }
                 return Response.AsRedirect("/");

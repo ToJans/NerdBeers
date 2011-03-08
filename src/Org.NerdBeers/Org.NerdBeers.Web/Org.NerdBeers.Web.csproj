@@ -108,6 +108,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BeerEvent.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Nerd.cs" />
     <Compile Include="Modules\BeerEventModule.cs" />
     <Compile Include="Modules\RootModule.cs" />

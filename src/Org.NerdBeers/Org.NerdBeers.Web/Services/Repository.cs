@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using Simple.Data;
 using Org.NerdBeers.Web.Models;
+using System.Dynamic;
 
 namespace Org.NerdBeers.Web.Services
 {
@@ -50,6 +51,20 @@ namespace Org.NerdBeers.Web.Services
             }
             return l.ToArray();
         }
+
+        public dynamic[] GetBeerEventComments(int id)
+        {
+            var l = new List<dynamic>();
+            foreach (var ec in DB.Comments.FindAllByEventId(id))
+            {
+                dynamic d = new ExpandoObject();
+                d.Comment = ec;
+                d.Nerd = DB.Nerds.FindById((int)ec.NerdId);
+                l.Add(d);
+            }
+            return l.ToArray();
+        }
+
 
         
         public dynamic DB

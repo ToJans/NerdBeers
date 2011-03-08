@@ -34,5 +34,24 @@
       ${ns.Name}
     </li>
   </ul>
+  <div>
+    <h4>Comments</h4>
+    <ul>
+      <li each="var c in Model.Comments">
+        ${c.Nerd.Name} - ${c.Comment.Created} <a if="c.Nerd.Guid==Model.NerdGuid" href="/BeerEvents/Comments/Delete/${c.Comment.Id}"> [Remove comment] </a>
+        <div>
+          ${c.Comment.CommentText}
+        </div>
+      </li>
+      <li>
+        <h5>Add comment</h5>
+        <form method="POST" action="/BeerEvents/${Model.BeerEvent.Id}/comments/insert">
+          <textarea name="Comment"></textarea>
+          <input type="submit"/>
+        </form>
+      </li>
+    </ul>
+    
+  </div>
   <a href="/">Go back</a>
 </content>
