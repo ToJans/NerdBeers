@@ -1,24 +1,54 @@
 ﻿body
 {
+    background-color:Teal;
+    text-align:center;
+}
+
+div 
+{
+    padding:10px;
+    margin:10px;
+    text-align:left;
+}
+
+div div
+{
+    padding:0px;
 }
 
 #sidebar
 {
-    display: block;
+    display: inline-block;
     float: left;
     border: 1px solid black;
     width: 220px;
+    background-color:Olive;
 }
-#sidebar label
+label
 {
     display: inline-block;
-    width: 200px;
+    width: 20%;
 }
 
 #othersidebar
 {
-    display: block;
+    display: inline-block;
     float: right;
     border: 1px solid black;
     width: 220px;
+    background-color:Olive;
+    text-align:center;
+}
+
+#maincontent
+{
+    display:inline-block;
+    border: 1px dotted black;
+    background-color:Teal;
+    width:60%;
+}
+
+#maincontent img
+{
+    float:right;
 }
