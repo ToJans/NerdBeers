@@ -48,9 +48,6 @@
     <Reference Include="Simple.Data">
       <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Simple.Data.AdapterApi">
-      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.AdapterApi.dll</HintPath>
-    </Reference>
     <Reference Include="Simple.Data.Ado">
       <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.Ado.dll</HintPath>
     </Reference>
