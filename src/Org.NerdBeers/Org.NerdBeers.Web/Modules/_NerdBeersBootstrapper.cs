@@ -5,7 +5,7 @@ using System.Web;
 using Nancy;
 using Nancy.Session;
 
-namespace Org.NerdBeers.Web.Services
+namespace Org.NerdBeers.Web.Modules
 {
     public class NerdBeersBootstrapper:DefaultNancyBootstrapper 
     {

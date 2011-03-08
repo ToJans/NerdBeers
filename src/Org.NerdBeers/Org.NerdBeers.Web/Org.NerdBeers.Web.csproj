@@ -114,9 +114,7 @@
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\_NerdBeerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\NerdBeersBootstrapper.cs" />
-    <Compile Include="Services\IRepository.cs" />
-    <Compile Include="Services\Repository.cs" />
+    <Compile Include="Modules\_NerdBeersBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\shared\application.spark">
@@ -124,9 +122,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\beerevents_index.spark">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\beerevents_detail.spark">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
