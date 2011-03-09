@@ -80,7 +80,7 @@ namespace Org.NerdBeers.Web.Modules
                 var model = new Comment
                 {
                     NerdId = Model.Nerd.Id,
-                    EventId = (int)x.Id,
+                    EventId = x.Id,
                     CommentText = Request.Form.Comment,
                     Created = DateTime.Now
                 };
@@ -90,20 +90,16 @@ namespace Org.NerdBeers.Web.Modules
 
             Get["/comments/delete/{Id}"] = x =>
             {
-                var cmt = DB.Comments.FindById((int)x.Id);
-                var eventId = (int)cmt.EventId;
+                Comment cmt = DB.Comments.FindById((int)x.Id);
                 if (cmt.NerdId == Model.Nerd.Id)
-                {
-                    DB.Comments.DeleteById((int)x.Id);
-                }
-                return RedirectToBeerEvent(eventId);
+                    DB.Comments.DeleteById(cmt.Id);
+                return RedirectToBeerEvent(cmt.EventId);
             };
 
             // Subscriptions
             Post["/subscribe/{eventid}"] = x =>
             {
-                Model.Nerd.Name = Request.Form.Name;
-                DB.Nerds.UpdateById(Model.Nerd);
+                DB.Nerds.UpdateById(Id: Model.Nerd.Id, Name: (string)Request.Form.Name);
                 DB.NerdSubscriptions.Insert(NerdId: Model.Nerd.Id, EventId: (int)x.eventid);
                 return RedirectToBeerEvent(x.eventid);
             };

@@ -111,7 +111,6 @@
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\_NerdBeerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modules\_NerdBeersBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\shared\application.spark">

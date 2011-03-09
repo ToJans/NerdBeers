@@ -34,12 +34,19 @@ namespace Org.NerdBeers.Web.Modules
         {
             Before.AddItemToEndOfPipeline(ctx =>
             {
+                var guid = System.Guid.NewGuid().ToString();
+                Request.Cookies.TryGetValue("NerdGuid", out guid);
+                Model.NerdGuid = guid;
+                Model.Nerd = DB.Nerds.FindByGuid(guid) ?? DB.Nerds.Insert(Name: "John Doe", Guid: guid);
                 Model.Title = "NerdBeers";
-                Model.Nerd = GetCurrentNerd();
                 IEnumerable<BeerEvent> ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
                 Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
                 Model.SubscribedEvents = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid).Cast<BeerEvent>();
                 return null;
+            });
+            After.AddItemToEndOfPipeline(ctx => 
+            {
+                ctx.Response.AddCookie("NerdGuid",Model.NerdGuid);
             });
         }
 
@@ -47,21 +54,6 @@ namespace Org.NerdBeers.Web.Modules
         protected dynamic RedirectToBeerEvent(int id)
         {
             return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
-        }
-
-
-        Nerd GetCurrentNerd()
-        {
-            string guid = null;
-            Session["NerdGuid"] = guid = (Session["NerdGuid"] as string) ?? System.Guid.NewGuid().ToString();
-            Nerd n = DB.Nerds.FindByGuid(guid);
-            if (n == null)
-            {
-                n = new Nerd() { Name = "John Doe" };
-                n.Guid = guid;
-                n = DB.Nerds.Insert(n);
-            }
-            return n;
         }
 
         public dynamic DB
