@@ -35,7 +35,7 @@ namespace Org.NerdBeers.Web.Modules
             Before.AddItemToEndOfPipeline(ctx =>
             {
                 var guid = System.Guid.NewGuid().ToString();
-                Request.Cookies.TryGetValue("NerdGuid", out guid);
+                if (Request.Cookies.ContainsKey("NerdGuid")) guid = Request.Cookies["NerdGuid"];
                 Model.NerdGuid = guid;
                 Model.Nerd = DB.Nerds.FindByGuid(guid) ?? DB.Nerds.Insert(Name: "John Doe", Guid: guid);
                 Model.Title = "NerdBeers";
