@@ -62,9 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\BeerEvents\Add_a_BeerEvent.cs" />
-    <Compile Include="Modules\with_NerdBeersContext.cs" />
-    <Compile Include="Modules\Root\RootSpecs.cs" />
+    <Compile Include="Modules\BeerEventSpecs.cs" />
+    <Compile Include="Modules\_with_NerdBeersContext.cs" />
+    <Compile Include="Modules\RootSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +74,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Modules\TestDatabase.xml" />
+    <EmbeddedResource Include="Modules\_TestDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\beerevents_detail.spark">
