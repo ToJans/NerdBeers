@@ -31,7 +31,7 @@ namespace Org.NerdBeers.Web.Modules
                         break;
                     }
                 }
-                return Show("beerevents_detail");
+                return View["beerevents_detail",Model];
             };
 
             // Create
@@ -42,7 +42,7 @@ namespace Org.NerdBeers.Web.Modules
                     Name = Request.Form.Name,
                     Location = Request.Form.Location,
                     EventDate = Request.Form.EventDate
-                };
+                }; 
                 var res = DB.BeerEvents.Insert(be);
                 return RedirectToBeerEvent(res.Id);
             };

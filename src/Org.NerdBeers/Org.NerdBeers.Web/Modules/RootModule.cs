@@ -5,7 +5,7 @@
         public RootModule() 
         {
             Get["/"] = x => {
-                return Show("root_index");
+                return View["root_index",Model];
             };
         }
     }

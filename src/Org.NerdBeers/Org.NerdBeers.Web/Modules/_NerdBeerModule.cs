@@ -14,11 +14,6 @@ namespace Org.NerdBeers.Web.Modules
     {
      
         public dynamic Model = new ExpandoObject();
-
-        public dynamic Show(string viewname)
-        {
-            return View[viewname, Model];
-        }
        
         public NerdBeerModule()
         {
@@ -56,21 +51,27 @@ namespace Org.NerdBeers.Web.Modules
             return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
         }
 
-        public dynamic DB
+        public static dynamic _db;
+
+        public dynamic DB 
         {
             get
             {
-                var c = System.Web.HttpContext.Current;
-                var s = ConfigurationManager.ConnectionStrings["NerdBeers"];
+                if (_db == null)
+                {
+                    var c = System.Web.HttpContext.Current;
+                    var s = ConfigurationManager.ConnectionStrings["NerdBeers"];
 
-                if (string.IsNullOrWhiteSpace(s.ConnectionString))
-                {
-                    return Simple.Data.Database.OpenFile(c.Server.MapPath("~/App_data/Nerdbeers.sdf"));
+                    if (string.IsNullOrWhiteSpace(s.ConnectionString))
+                    {
+                        _db= Simple.Data.Database.OpenFile(c.Server.MapPath("~/App_data/Nerdbeers.sdf"));
+                    }
+                    else
+                    {
+                        _db= Simple.Data.Database.OpenConnection(s.ConnectionString);
+                    }
                 }
-                else
-                {
-                    return Simple.Data.Database.OpenConnection(s.ConnectionString);
-                }
+                return _db;
             }
         }
     }

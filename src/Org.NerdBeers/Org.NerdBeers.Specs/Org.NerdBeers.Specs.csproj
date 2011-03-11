@@ -31,8 +31,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\..\Dependencies\machine.specifications\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy">
+      <HintPath>..\..\Dependencies\Nancy\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Hosting.Aspnet">
+      <HintPath>..\..\Dependencies\Nancy\Nancy.Hosting.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Spark">
+      <HintPath>..\..\Dependencies\Nancy\Nancy.ViewEngines.Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data">
+      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Mocking">
+      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.Mocking.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark">
+      <HintPath>..\..\Dependencies\Nancy\Spark.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +62,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\MainSpecs.cs" />
+    <Compile Include="Modules\BeerEvents\Add_a_BeerEvent.cs" />
+    <Compile Include="Modules\with_NerdBeersContext.cs" />
+    <Compile Include="Modules\Root\RootSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj">
+      <Project>{4BAB948C-A50B-4503-A883-13D9F5C862A1}</Project>
+      <Name>Org.NerdBeers.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\TestDatabase.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\beerevents_detail.spark">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\root_index.spark">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\shared\application.spark">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

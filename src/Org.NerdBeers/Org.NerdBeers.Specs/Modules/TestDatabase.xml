@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <Nerds _keys="Id" Id="System.Int32" Guid="System.String" Name="System.String">
+    <Nerd Id="1" Guid="xxx" Name="Tom"/>
+  </Nerds>
+  <BeerEvents _keys="Id" Id="System.Int32" Name="System.String" EventDate="System.DateTime">
+    <BeerEvent Id="1" Name="First nerdbeer event" EventDate="01/04/2010 09:00" >
+      <NerdSubscriptions _keys="Id" Id="System.Int32" EventId="System.Int32" NerdId="System.Int32">
+        <NerdSubscription Id="1" EventId="1" NerdId="1" />
+      </NerdSubscriptions>
+    </BeerEvent>
+  </BeerEvents>
+</root>
