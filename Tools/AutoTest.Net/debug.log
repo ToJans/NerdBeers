@@ -1,0 +1,526 @@
+Publishing message of type AutoTest.Messages.InformationMessage
+Initial configuration finished
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj initialize cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj preparing cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj initialize cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj preparing cache
+Publishing message of type AutoTest.Messages.InformationMessage
+Cache initialized
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received information message
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received information message
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.WarningMessage
+Presenter received warning message
+Presenter received warning message
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received warning message
+Presenter received warning message
+Presenter received information message
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Presenter received run information message
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp205.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Presenter received test run message
+Merging test run results
+Adding test  (Any.Failed) from  named System.Xml.XmlException: Root element is missing.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.ThrowWithoutLineInfo(String res)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlTextReaderImpl.Read()
+   at System.Xml.XPath.XPathDocument.LoadFromReader(XmlReader reader, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecReportParser.Parse()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecCommandLineBuilder.<>c__DisplayClass18.<XmlReport>b__16()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.Run.<HarvestResults>b__10(Func`1 x)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTestsForFramework(Run run)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<>c__DisplayClass8.<RunTests>b__4()
+   at AutoTest.Core.TestRunners.TestRunners.EnumerableExtensions.ContinueWith[T](IEnumerable`1 source1, Func`1 source2)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<RunTests>b__3(Run x)
+   at System.Linq.Enumerable.<>c__DisplayClass12`3.<CombineSelectors>b__11(TSource x)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTests(TestRunInfo[] runInfos)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runTests(ITestRunner testRunner, TestRunInfo[] runInfos, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runPreProcessedTestRun(RunInfo[] projectList, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.execute(ProjectChangeMessage message) saying AutoTest.Net internal error in 
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp20B.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received test run message
+Merging test run results
+Adding test  (Any.Failed) from  named System.Xml.XmlException: Root element is missing.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.ThrowWithoutLineInfo(String res)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlTextReaderImpl.Read()
+   at System.Xml.XPath.XPathDocument.LoadFromReader(XmlReader reader, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecReportParser.Parse()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecCommandLineBuilder.<>c__DisplayClass18.<XmlReport>b__16()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.Run.<HarvestResults>b__10(Func`1 x)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTestsForFramework(Run run)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<>c__DisplayClass8.<RunTests>b__4()
+   at AutoTest.Core.TestRunners.TestRunners.EnumerableExtensions.ContinueWith[T](IEnumerable`1 source1, Func`1 source2)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<RunTests>b__3(Run x)
+   at System.Linq.Enumerable.<>c__DisplayClass12`3.<CombineSelectors>b__11(TSource x)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTests(TestRunInfo[] runInfos)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runTests(ITestRunner testRunner, TestRunInfo[] runInfos, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runPreProcessedTestRun(RunInfo[] projectList, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.execute(ProjectChangeMessage message) saying AutoTest.Net internal error in 
+Presenter received run finished message
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp20E.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Presenter received test run message
+Merging test run results
+Adding test  (Any.Failed) from  named System.Xml.XmlException: Root element is missing.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.ThrowWithoutLineInfo(String res)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlTextReaderImpl.Read()
+   at System.Xml.XPath.XPathDocument.LoadFromReader(XmlReader reader, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecReportParser.Parse()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecCommandLineBuilder.<>c__DisplayClass18.<XmlReport>b__16()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.Run.<HarvestResults>b__10(Func`1 x)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTestsForFramework(Run run)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<>c__DisplayClass8.<RunTests>b__4()
+   at AutoTest.Core.TestRunners.TestRunners.EnumerableExtensions.ContinueWith[T](IEnumerable`1 source1, Func`1 source2)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<RunTests>b__3(Run x)
+   at System.Linq.Enumerable.<>c__DisplayClass12`3.<CombineSelectors>b__11(TSource x)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTests(TestRunInfo[] runInfos)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runTests(ITestRunner testRunner, TestRunInfo[] runInfos, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runPreProcessedTestRun(RunInfo[] projectList, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.execute(ProjectChangeMessage message) saying AutoTest.Net internal error in 
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Publishing message of type AutoTest.Messages.InformationMessage
+Initial configuration finished
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj initialize cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj preparing cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj initialize cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj preparing cache
+Publishing message of type AutoTest.Messages.InformationMessage
+Cache initialized
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received information message
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received information message
+Publishing message of type AutoTest.Messages.WarningMessage
+Presenter received warning message
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received warning message
+Presenter received warning message
+Presenter received warning message
+Presenter received information message
+Presenter received information message
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTestFolder\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp212.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTestFolder\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Presenter received test run message
+Merging test run results
+Adding test  (Any.Failed) from  named System.Xml.XmlException: Root element is missing.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.ThrowWithoutLineInfo(String res)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlTextReaderImpl.Read()
+   at System.Xml.XPath.XPathDocument.LoadFromReader(XmlReader reader, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri, XmlSpace space)
+   at System.Xml.XPath.XPathDocument..ctor(String uri)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecReportParser.Parse()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecCommandLineBuilder.<>c__DisplayClass18.<XmlReport>b__16()
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.Run.<HarvestResults>b__10(Func`1 x)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTestsForFramework(Run run)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<>c__DisplayClass8.<RunTests>b__4()
+   at AutoTest.Core.TestRunners.TestRunners.EnumerableExtensions.ContinueWith[T](IEnumerable`1 source1, Func`1 source2)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.<RunTests>b__3(Run x)
+   at System.Linq.Enumerable.<>c__DisplayClass12`3.<CombineSelectors>b__11(TSource x)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Linq.Enumerable.<SelectManyIterator>d__14`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner.RunTests(TestRunInfo[] runInfos)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runTests(ITestRunner testRunner, TestRunInfo[] runInfos, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.runPreProcessedTestRun(RunInfo[] projectList, RunReport runReport)
+   at AutoTest.Core.Messaging.MessageConsumers.ProjectChangeConsumer.execute(ProjectChangeMessage message) saying AutoTest.Net internal error in 
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Publishing message of type AutoTest.Messages.InformationMessage
+Shuting down configuration
+Presenter received information message
+Publishing message of type AutoTest.Messages.InformationMessage
+Initial configuration finished
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj initialize cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Web\Org.NerdBeers.Web.csproj preparing cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj initialize cache
+c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj preparing cache
+Publishing message of type AutoTest.Messages.InformationMessage
+Cache initialized
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received information message
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received information message
+Publishing message of type AutoTest.Messages.WarningMessage
+Presenter received warning message
+Publishing message of type AutoTest.Messages.WarningMessage
+Presenter received warning message
+Publishing message of type AutoTest.Messages.WarningMessage
+Presenter received warning message
+Publishing message of type AutoTest.Messages.WarningMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Presenter received warning message
+Presenter received information message
+Presenter received information message
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\with_NerdBeersContext.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec-clr4.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp216.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Presenter received test run message
+Merging test run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.AutoTestTestRunner
+Adding test  (MSpec.Failed) from c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll named Object reference not set to an instance of an object. saying Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.should_show_upcoming_events in  c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs, Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.<.ctor>b__2():23
+Adding test  (MSpec.Failed) from c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll named Object reference not set to an instance of an object. saying Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.should_show_events_you_registered_for in  c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs, Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.<.ctor>b__3():24
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec-clr4.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp21A.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Presenter received test run message
+Merging test run results
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Preparing runner AutoTest.Core.TestRunners.TestRunners.AutoTestTestRunner
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Presenter received build message
+Merging build run results
+Stack line message c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec-clr4.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp21D.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Presenter received test run message
+Merging test run results
+Removing existing test in case it changed  (MSpec.Failed) from c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll named Object reference not set to an instance of an object. saying Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.should_show_upcoming_events in  c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.get_DB():65 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.<SetupModelDefaults>b__1a(NancyContext ctx):35 C:\Projecten\Nancy\Nancy\src\Nancy\BeforePipeline.cs, Nancy.BeforePipeline.Invoke(NancyContext context):86 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ExecuteRoutePreReq(NancyContext context, Func`2 resolveResultPreReq):140 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ResolveAndInvokeRoute(NancyContext context):115 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.HandleRequest(Request request):85 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs, Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.<.ctor>b__1():21
+Adding test  (MSpec.Failed) from c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll named Object reference not set to an instance of an object. saying Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.should_show_upcoming_events in  c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.get_DB():65 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.<SetupModelDefaults>b__1a(NancyContext ctx):35 C:\Projecten\Nancy\Nancy\src\Nancy\BeforePipeline.cs, Nancy.BeforePipeline.Invoke(NancyContext context):86 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ExecuteRoutePreReq(NancyContext context, Func`2 resolveResultPreReq):140 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ResolveAndInvokeRoute(NancyContext context):115 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.HandleRequest(Request request):85 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs, Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.<.ctor>b__1():21
+Removing existing test in case it changed  (MSpec.Failed) from c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll named Object reference not set to an instance of an object. saying Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.should_show_events_you_registered_for in  c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.get_DB():65 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.<SetupModelDefaults>b__1a(NancyContext ctx):35 C:\Projecten\Nancy\Nancy\src\Nancy\BeforePipeline.cs, Nancy.BeforePipeline.Invoke(NancyContext context):86 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ExecuteRoutePreReq(NancyContext context, Func`2 resolveResultPreReq):140 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ResolveAndInvokeRoute(NancyContext context):115 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.HandleRequest(Request request):85 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs, Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.<.ctor>b__1():21
+Adding test  (MSpec.Failed) from c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll named Object reference not set to an instance of an object. saying Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.should_show_events_you_registered_for in  c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.get_DB():65 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Web\Modules\_NerdBeerModule.cs, Org.NerdBeers.Web.Modules.NerdBeerModule.<SetupModelDefaults>b__1a(NancyContext ctx):35 C:\Projecten\Nancy\Nancy\src\Nancy\BeforePipeline.cs, Nancy.BeforePipeline.Invoke(NancyContext context):86 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ExecuteRoutePreReq(NancyContext context, Func`2 resolveResultPreReq):140 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.ResolveAndInvokeRoute(NancyContext context):115 C:\Projecten\Nancy\Nancy\src\Nancy\NancyEngine.cs, Nancy.NancyEngine.HandleRequest(Request request):85 c:\Projecten\Org.NerdBeers\src\Org.NerdBeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs, Org.NerdBeers.Specs.Modules.Welcome_screen_at_root.<.ctor>b__1():21
+Preparing runner AutoTest.Core.TestRunners.TestRunners.AutoTestTestRunner
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Directory watcher about to publish change for 1 files
+Publishing message of type AutoTest.Messages.FileChangeMessage
+Presenter recieved AutoTest.Messages.FileChangeMessage
+Consuming file change for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Modules\RootSpecs.cs
+
+File change consumer about to publish change for 1 files
+Publishing message of type AutoTest.Messages.ProjectChangeMessage
+Message bus started blocking AutoTest.Messages.ProjectChangeMessage
+Consuming project changes for:
+    c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+
+Publishing message of type AutoTest.Messages.RunStartedMessage
+Starting project change run
+Publishing message of type AutoTest.Messages.InformationMessage
+Running builds
+Set to build project c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Publishing message of type AutoTest.Messages.InformationMessage
+Running build: C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\Org.NerdBeers.Specs.csproj" /property:OutDir=bin\AutoTest.Net\
+Presenter received run start message
+Presenter received information message
+Presenter received run information message
+Presenter received information message
+Publishing message of type AutoTest.Messages.BuildRunMessage
+Preparing runner AutoTest.Core.TestRunners.TestRunners.NUnitTestRunner
+Presenter received build message
+Merging build run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.XUnitTestRunner
+Preparing runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Publishing message of type AutoTest.Messages.RunInformationMessage
+Presenter received run information message
+Running tests for runner AutoTest.Core.TestRunners.TestRunners.MSpecTestRunner
+Launching: c:\projecten\Org.Nerdbeers\tools\machine.Specifications\mspec-clr4.exe --timeinfo --xml "C:\Documents and Settings\Core\Local Settings\Temp\tmp220.tmp" "c:\Projecten\Org.NerdBeers\src\Org.Nerdbeers\Org.NerdBeers.Specs\bin\AutoTest.Net\Org.NerdBeers.Specs.dll"
+Publishing message of type AutoTest.Messages.TestRunMessage
+Presenter received test run message
+Merging test run results
+Preparing runner AutoTest.Core.TestRunners.TestRunners.AutoTestTestRunner
+Publishing message of type AutoTest.Messages.RunFinishedMessage
+Presenter received run finished message
+Publishing message of type AutoTest.Messages.InformationMessage
+Shuting down configuration
+Presenter received information message
