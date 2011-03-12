@@ -51,14 +51,77 @@ namespace Org.NerdBeers.Specs.Modules
             () => ctx.Response.ShouldBeOfType<RedirectResponse>();
 
         It should_have_created_the_beerevent_in_the_db = 
-            () => ((Nerd)DB.BeerEvents.FindByName("TestEvent")).ShouldNotBeNull();
+            () => ((BeerEvent)DB.BeerEvents.FindByName("TestEvent")).ShouldNotBeNull();
     }
 
-    public class Modify_a_BeerEvent : with_NerdBeersContext { }
-    public class Delete_a_BeerEvent_without_subscribers : with_NerdBeersContext { }
-    public class Delete_a_BeerEvent_with_subscribers : with_NerdBeersContext { }
+    public class Modify_a_BeerEvent : with_NerdBeersContext 
+    {
+        static DateTime refdate = DateTime.Now;
+        static TimeSpan timetolerance = TimeSpan.FromMinutes(1);
 
-    public class Subscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext { }
+        Establish context = () =>
+        {
+            Req = new Request("POST", "/BeerEvents/update/1", "text/html");
+            Req.Form.Id = 1;
+            Req.Form.Name = "TestEvent";
+            Req.Form.Location = "Everywhere";
+            Req.Form.EventDate = refdate;
+        };
+
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_new_nerd =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_modified_the_name_in_the_db =
+            () => ((BeerEvent)DB.BeerEvents.FindById(1)).Name.ShouldEqual("TestEvent");
+
+        It should_have_modified_the_location_in_the_db =
+            () => ((BeerEvent)DB.BeerEvents.FindById(1)).Location.ShouldEqual("Everywhere");
+        
+        It should_have_modified_the_eventdate_in_the_db =
+            () => ((BeerEvent)DB.BeerEvents.FindById(1)).EventDate.ShouldBeCloseTo(refdate,timetolerance);
+    }
+
+    public class Delete_a_BeerEvent_without_subscribers : with_NerdBeersContext 
+    {
+        Establish context = () =>
+        {
+            Req = new Request("GET", "/BeerEvents/delete/1", "text/html");
+            DB.NerdSubscriptions.DeleteByEventId(1);
+        };
+
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_root =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_deleted_the_event =
+            () => ((BeerEvent)DB.BeerEvents.FindById(1)).ShouldBeNull(); 
+    }
+
+    public class Delete_a_BeerEvent_with_subscribers : with_NerdBeersContext 
+    {
+        Establish context = () => Req = new Request("GET", "/BeerEvents/delete/1", "text/html");
+
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_event =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_not_have_deleted_the_event =
+            () => ((BeerEvent)DB.BeerEvents.FindById(1)).Name.ShouldNotBeNull();
+
+    }
+
+    public class Subscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
+    {
+ 
+    }
+
     public class Unsubscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext { }
 
     public class Add_a_Comment : with_NerdBeersContext { }

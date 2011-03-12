@@ -17,7 +17,22 @@
         </NerdSubscription>
       </NerdSubscriptions>
     </BeerEvent>
+    <!--
+    <BeerEvent Id="2" Name="Second nerdbeer event without subscriptions" EventDate="01/04/2010 09:00" Location="Everywhere">
+      <NerdSubscriptions _keys="Id" Id="System.Int32" EventId="System.Int32" NerdId="System.Int32">
+        <Nerds _keys="Id" Id="System.Int32" Guid="System.String" Name="System.String">
+        </Nerds>
+      </NerdSubscriptions>
+    </BeerEvent>
+    -->
   </BeerEvents>
+  <NerdSubscriptions _keys="Id" Id="System.Int32" EventId="System.Int32" NerdId="System.Int32">
+    <NerdSubscription Id="1" EventId="1" NerdId="1">
+      <Nerds _keys="Id" Id="System.Int32" Guid="System.String" Name="System.String">
+        <Nerd Id="1" Guid="xxx" Name="Tom"/>
+      </Nerds>
+    </NerdSubscription>
+  </NerdSubscriptions>
   <Comments _keys="Id" Id="System.Int32" EventId="System.Int32" NerdId="System.Int32" CommentText="System.String" Created="System.DateTime">
     <Comment Id="1" EventId="1" NerdId="1" CommentText="Hakuna matata" Created="01/05/2010 09:00">
       <Nerd>
