@@ -39,5 +39,10 @@
         <Nerd Id="1" Guid="xxx" Name="Tom"/>
       </Nerd>
     </Comment>
+    <Comment Id="2" EventId="1" NerdId="2" CommentText="Hakuna matata 2" Created="01/05/2010 10:00">
+      <Nerd>
+        <Nerd Id="2" Guid="xxx" Name="Yves"/>
+      </Nerd>
+    </Comment>
   </Comments>
 </root>

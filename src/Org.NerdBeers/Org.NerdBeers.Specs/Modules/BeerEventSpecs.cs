@@ -119,12 +119,89 @@ namespace Org.NerdBeers.Specs.Modules
 
     public class Subscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
- 
+        Establish context = () =>
+            {
+                DB.NerdSubscriptions.DeleteByEventId(1);
+                Req = new Request("POST", "/BeerEvents/subcribe/1", "text/html");
+                Req.Form.Name = "Juleke";
+            };
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_event =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_subscribed_the_nerd =
+            () => ((string)(DB.NerdSubscriptions.FindByEventId(1).Guid)).ShouldEqual("xxx");
     }
 
-    public class Unsubscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext { }
+    public class Unsubscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
+    {
+        Establish context = () =>
+        {
+            Req = new Request("GET", "/BeerEvents/unsubcribe/1", "text/html");
+        };
+        Because of = () => ProcessRequest();
 
-    public class Add_a_Comment : with_NerdBeersContext { }
-    public class Remove_a_comment : with_NerdBeersContext { }
-    public class Remove_a_comment_which_is_not_from_the_current_user : with_NerdBeersContext { }
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_event =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_unsubscribed_the_nerd =
+            () => ((IEnumerable<dynamic>)DB.NerdSubscriptions.FindAllByEventIdAndNerdId(1,1)).Count().ShouldEqual(0);
+    }
+
+    public class Add_a_Comment : with_NerdBeersContext 
+    {
+        Establish context = () =>
+        {
+            Req = new Request("POST", "/BeerEvents/1/comments/create", "text/html");
+            Req.Form.CommentText = "w00t comment";
+        };
+
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_event =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_added_the_comment =
+            () => ((IEnumerable<dynamic>)DB.Comments.FindAllByCommentText("w00t comment")).Count().ShouldEqual(1);
+   
+    }
+
+    public class Remove_an_own_comment : with_NerdBeersContext 
+    {
+        Establish context = () =>
+        {
+            Req = new Request("GET", "/BeerEvents/comments/delete/1", "text/html");
+        };
+
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_event =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_removed_the_comment =
+            () => ((IEnumerable<dynamic>)DB.Comments.FindAllByCommentId(1)).Count().ShouldEqual(0);
+ 
+    }
+    
+    public class Remove_a_comment_which_is_not_from_the_current_user : with_NerdBeersContext 
+    {
+        Establish context = () =>
+        {
+            Req = new Request("GET", "/BeerEvents/comments/delete/2", "text/html");
+        };
+
+        Because of = () => ProcessRequest();
+
+        // TODO how to test the redirect url ?
+        It should_redirect_to_the_event =
+            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+
+        It should_have_removed_the_comment =
+            () => ((IEnumerable<dynamic>)DB.Comments.FindByCommentId(2)).Count().ShouldEqual(1);
+    }
 }
