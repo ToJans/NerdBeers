@@ -17,20 +17,12 @@ namespace Org.NerdBeers.Web.Modules
             Get["/single/{Id}"] = x =>
             {
                 int id = x.Id;
+                IEnumerable<Nerd> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).Cast<Nerd>(); 
                 Model.BeerEvent = DB.BeerEvents.FindById(id);
-                Model.Subscribers = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).Cast<Nerd>();
-                Model.CanSubscribe = true;
-                Model.CanEdit = true;
+                Model.Subscribers = subscribedNerds;
+                Model.CanSubscribe = !subscribedNerds.Any(n=>n.Guid == Model.Nerd.Guid);
+                Model.CanEdit = !subscribedNerds.Any();
                 Model.Comments = DB.Comments.FindAllByEventId(id);
-                foreach (var sn in Model.Subscribers)
-                {
-                    Model.CanEdit = false;
-                    if (sn.Guid == Model.Nerd.Guid)
-                    {
-                        Model.CanSubscribe = false;
-                        break;
-                    }
-                }
                 return View["beerevents_detail",Model];
             };
 
@@ -50,15 +42,15 @@ namespace Org.NerdBeers.Web.Modules
             // Update
             Post["/update/{Id}"] = x =>
             {
-                var model = new BeerEvent
+                var be = new BeerEvent
                 {
                     Id = x.Id,
                     Name = Request.Form.Name,
                     Location = Request.Form.Location,
                     EventDate = Request.Form.EventDate
                 };
-                DB.BeerEvents.Update(model);
-                return RedirectToBeerEvent(model.Id);
+                DB.BeerEvents.Update(be);
+                return RedirectToBeerEvent(be.Id);
             };
 
             // Delete
@@ -77,14 +69,14 @@ namespace Org.NerdBeers.Web.Modules
             // Comments
             Post["/{Id}/comments/create"] = x =>
             {
-                var model = new Comment
+                var be = new Comment
                 {
                     NerdId = Model.Nerd.Id,
                     EventId = x.Id,
                     CommentText = Request.Form.Comment,
                     Created = DateTime.Now
                 };
-                DB.Comments.Insert(model);
+                DB.Comments.Insert(be);
                 return RedirectToBeerEvent(x.Id);
             };
 
