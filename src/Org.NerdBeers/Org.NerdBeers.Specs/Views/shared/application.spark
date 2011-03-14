@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<var m="Model" type="dynamic"/>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Nerdbeers</title>
@@ -21,7 +22,7 @@
         Upcoming Nerdbeers
       </h3>
       <ul>
-        <li each="var v in Model.UpcomingEvents">
+        <li each="var v in m.UpcomingEvents">
           <a href="/BeerEvents/single/${v.Id}"> ${v.Name} - ${v.Location} </a> ${v.EventDate}
         </li>
       </ul>
@@ -29,7 +30,7 @@
     <div id="othersidebar" style="">
       <h3>NerdBeer events you subscribed to:</h3>
       <ul>
-        <li each="var v in Model.SubscribedEvents">
+        <li each="var v in m.SubscribedEvents">
           <a href="/BeerEvents/single/${v.Id}"> ${v.Name} - ${v.Location} </a> ${v.EventDate}
         </li>
       </ul>

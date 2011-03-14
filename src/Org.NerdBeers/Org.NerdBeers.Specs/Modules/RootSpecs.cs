@@ -4,7 +4,7 @@ using Nancy;
 
 namespace Org.NerdBeers.Specs.Modules
 {
-    public class Welcome_screen_at_root : with_NerdBeersContext 
+    public class Welcome_screen_at_root : with_NerdBeersContext
     {
         Establish context = () => Req = new Request("GET", "/", "text/html");
 

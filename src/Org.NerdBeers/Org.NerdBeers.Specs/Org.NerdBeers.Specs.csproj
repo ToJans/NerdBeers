@@ -37,9 +37,6 @@
     <Reference Include="Nancy">
       <HintPath>..\..\Dependencies\Nancy\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Hosting.Aspnet">
-      <HintPath>..\..\Dependencies\Nancy\Nancy.Hosting.Aspnet.dll</HintPath>
-    </Reference>
     <Reference Include="Nancy.ViewEngines.Spark">
       <HintPath>..\..\Dependencies\Nancy\Nancy.ViewEngines.Spark.dll</HintPath>
     </Reference>
@@ -77,19 +74,19 @@
     <EmbeddedResource Include="Modules\_TestDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\beerevents_detail.spark">
+    <Content Include="views\beerevents_detail.spark">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\root_index.spark">
+    <Content Include="views\root_index.spark">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\shared\application.spark">
+    <Content Include="views\shared\application.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

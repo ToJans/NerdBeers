@@ -1,62 +1,63 @@
-﻿<content name="body">
-  <img src="http://maps.google.com/maps/api/staticmap?center=${Model.BeerEvent.Location}&zoom=14&size=480x480&markers=color:red&sensor=false" />
-  <form if="Model.CanEdit==true" method="POST" action="/BeerEvents/update/${Model.BeerEvent.Id}">
+﻿<var m="Model" type="dynamic"/>
+<content name="body">
+  <img src="http://maps.google.com/maps/api/staticmap?center=${m.BeerEvent.Location}&zoom=14&size=480x480&markers=color:red&sensor=false" />
+  <form if="m.CanEdit==true" method="POST" action="/BeerEvents/update/${m.BeerEvent.Id}">
     <div><label for="Name">Name</label>
-    <input type="text" name="Name" value="${Model.BeerEvent.Name}"/>
+    <input type="text" name="Name" value="${m.BeerEvent.Name}"/>
     </div>
     <div>
     <label for="Location">Location</label>
-    <input type="text" name="Location" value="${Model.BeerEvent.Location}"/>
+    <input type="text" name="Location" value="${m.BeerEvent.Location}"/>
     </div>
     <div>
       <label for="EventDate">Date</label>
-    <input type="text" name="EventDate" value="${Model.BeerEvent.EventDate}"/>
+    <input type="text" name="EventDate" value="${m.BeerEvent.EventDate}"/>
     </div>
     <div>
       <input type="submit"/>
-      <a href="/BeerEvents/delete/${Model.BeerEvent.Id}">Remove event</a>
+      <a href="/BeerEvents/delete/${m.BeerEvent.Id}">Remove event</a>
     </div>
   </form>
-  <div if="Model.CanEdit==false">
+  <div if="m.CanEdit==false">
     <div>
-      <label>Your name/alias</label>${Model.BeerEvent.Name}
+      <label>Your name/alias</label>${m.BeerEvent.Name}
     </div>
     <div>
-      <label>Location</label>${Model.BeerEvent.Location}</div>
+      <label>Location</label>${m.BeerEvent.Location}</div>
     <div>
-      <label>Date</label>${Model.BeerEvent.EventDate}</div>
+      <label>Date</label>${m.BeerEvent.EventDate}</div>
   </div>
-  <div if="Model.CanSubscribe==true">
+  <div if="m.CanSubscribe==true">
   <h4>Subcribe for event</h4>
-  <form method="POST" action="/BeerEvents/subscribe/${Model.BeerEvent.Id}">
-    <input type="hidden" name="Guid" value="${Model.Nerd.Guid}"/>
+  <form method="POST" action="/BeerEvents/subscribe/${m.BeerEvent.Id}">
+    <input type="hidden" name="Guid" value="${m.Nerd.Guid}"/>
     <label for="Name">Name</label>
-    <input type="text" name="Name" value="${Model.Nerd.Name}"/>
+    <input type="text" name="Name" value="${m.Nerd.Name}"/>
     <input type="submit"/>
   </form>
   </div>
-  <div if="Model.CanSubscribe==false">
+  <div if="m.CanSubscribe==false">
     <h4>You are subscribed ! </h4>
-    <a href="/BeerEvents/unsubscribe/${Model.BeerEvent.Id}">Unsubscribe</a>
+    <a href="/BeerEvents/unsubscribe/${m.BeerEvent.Id}">Unsubscribe</a>
   </div>
   <h4>Subscribed nerds:</h4>
   <ul>
-    <li each="var ns in Model.Subscribers">
+    <li each="var ns in m.Subscribers">
       ${ns.Name}
     </li>
   </ul>
   <div>
     <h4>Comments</h4>
     <ul>
-      <li each="var c in Model.Comments">
-        ${c.Nerd.Name} - ${c.Created} <a if="c.Nerd.Guid==Model.Nerd.Guid" href="/BeerEvents/Comments/Delete/${c.Id}"> [Remove comment] </a>
+      <li each="var c in m.Comments">
+        ${c.Nerd.Name} - ${c.Created} <a if="c.Nerd.Guid==m.Nerd.Guid" href="/BeerEvents/Comments/Delete/${c.Id}"> [Remove comment] </a>
         <div>
           ${c.CommentText}
         </div>
       </li>
       <li>
         <h5>Add comment</h5>
-        <form method="POST" action="/BeerEvents/${Model.BeerEvent.Id}/comments/create">
+        <form method="POST" action="/BeerEvents/${m.BeerEvent.Id}/comments/create">
           <textarea name="Comment"></textarea>
           <input type="submit"/>
         </form>

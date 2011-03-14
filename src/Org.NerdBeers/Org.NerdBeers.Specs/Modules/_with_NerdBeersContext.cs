@@ -40,7 +40,7 @@ namespace Org.NerdBeers.Specs.Modules
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Org.NerdBeers.Specs.Modules._TestDatabase.xml"))
             using (StreamReader reader = new StreamReader(stream))
             {
-                string result = reader.ReadToEnd();
+                string result = reader.ReadToEnd().Replace("/2010 ","/"+DateTime.Now.Year.ToString()+" ");
                 MockHelper.UseMockAdapter(new XmlMockAdapter(result));
                 return Database.Default;
             }
