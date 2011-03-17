@@ -62,7 +62,7 @@ namespace Org.NerdBeers.Specs.Modules
 
         protected static void AddFileToRequest(string filename, Stream contents)
         {
-        };
+        }
 
 
     }
