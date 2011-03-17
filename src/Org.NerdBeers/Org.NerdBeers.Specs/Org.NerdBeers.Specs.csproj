@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\BeerEventSpecs.cs" />
+    <Compile Include="Modules\AuthenticationSpecs.cs" />
     <Compile Include="Modules\_with_NerdBeersContext.cs" />
     <Compile Include="Modules\RootSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,19 +75,19 @@
     <EmbeddedResource Include="Modules\_TestDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="views\beerevents_detail.spark">
+    <Content Include="Views\beerevents_detail.spark">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="views\root_index.spark">
+    <Content Include="Views\root_index.spark">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="views\shared\application.spark">
+    <Content Include="Views\shared\application.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

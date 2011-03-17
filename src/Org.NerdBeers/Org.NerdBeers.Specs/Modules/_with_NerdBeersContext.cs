@@ -33,6 +33,7 @@ namespace Org.NerdBeers.Specs.Modules
             bs.Initialise();
             Engine = bs.GetEngine();
             NerdBeers.Web.Modules.NerdBeerModule._db = DB=GetMockDB();
+            Req = null;
         }
 
         static dynamic GetMockDB()
@@ -58,6 +59,10 @@ namespace Org.NerdBeers.Specs.Modules
             var l=ms.Read(buf,0,(int)ms.Length);
             RenderedContent = System.Text.ASCIIEncoding.ASCII.GetString(buf);
         }
+
+        protected static void AddFileToRequest(string filename, Stream contents)
+        {
+        };
 
 
     }
