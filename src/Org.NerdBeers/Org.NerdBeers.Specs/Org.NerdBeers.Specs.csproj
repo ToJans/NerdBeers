@@ -37,6 +37,9 @@
     <Reference Include="Nancy">
       <HintPath>..\..\Dependencies\Nancy\Nancy.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Forms">
+      <HintPath>..\..\Dependencies\Nancy\Nancy.Authentication.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy.ViewEngines.Spark">
       <HintPath>..\..\Dependencies\Nancy\Nancy.ViewEngines.Spark.dll</HintPath>
     </Reference>
@@ -61,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Modules\BeerEventSpecs.cs" />
     <Compile Include="Modules\AuthenticationSpecs.cs" />
+    <Compile Include="Modules\SpecBootStrapper.cs" />
     <Compile Include="Modules\_with_NerdBeersContext.cs" />
     <Compile Include="Modules\RootSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

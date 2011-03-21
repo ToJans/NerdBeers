@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nancy;
 using Org.NerdBeers.Web.Models;
+using Org.NerdBeers.Web.Services;
 
 
 namespace Org.NerdBeers.Web.Modules
@@ -10,8 +11,8 @@ namespace Org.NerdBeers.Web.Modules
     public class BeerEventModule : NerdBeerModule
     {
 
-        public BeerEventModule()
-            : base("/BeerEvents")
+        public BeerEventModule(IDBFactory DBFactory)
+            : base("/BeerEvents",DBFactory)
         {
             // Read single
             Get["/single/{Id}"] = x =>

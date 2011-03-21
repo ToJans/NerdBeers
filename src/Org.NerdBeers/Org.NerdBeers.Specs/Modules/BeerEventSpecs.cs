@@ -114,7 +114,10 @@ namespace Org.NerdBeers.Specs.Modules
 
     public class Delete_a_BeerEvent_with_subscribers : with_NerdBeersContext 
     {
-        Establish context = () => Req = new Request("GET", "/BeerEvents/delete/1", "text/html");
+        Establish context = () =>
+            {
+                Req = new Request("GET", "/BeerEvents/delete/1", "text/html");
+            };
 
         Because of = () => ProcessRequest();
 
@@ -128,7 +131,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
 
     //FIXME
-    [Ignore("patch simple.data to support relations in xmlmockadapter in a proper way")]
+    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Subscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
         Establish context = () =>
@@ -148,7 +151,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
 
     //FIXME
-    [Ignore("patch simple.data to support relations in xmlmockadapter in a proper way")]
+    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Unsubscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
         Establish context = () =>
@@ -166,7 +169,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
 
     //FIXME
-    [Ignore("patch simple.data to support relations in xmlmockadapter in a proper way")]
+    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Add_a_Comment : with_NerdBeersContext 
     {
         Establish context = () =>
@@ -205,9 +208,10 @@ namespace Org.NerdBeers.Specs.Modules
     }
     
     //FIXME
-    [Ignore("patch simple.data to support relations in xmlmockadapter in a proper way")]
+    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Remove_a_comment_which_is_not_from_the_current_user : with_NerdBeersContext 
     {
+
         Establish context = () =>
         {
             Req = new Request("GET", "/BeerEvents/comments/delete/2", "text/html");

@@ -20,31 +20,15 @@ namespace Org.NerdBeers.Specs.Modules
         protected static dynamic DB;
         protected static string RenderedContent;
 
-        Establish context = () =>
-        {
-            InitNerdBeers();
-        };
+        Establish context = () => InitNerdBeers();
 
         protected static void InitNerdBeers()
         {
-            Assembly.Load(typeof(Nancy.ViewEngines.Spark.SparkViewEngine).Assembly.FullName);
-
-            var bs = new NerdBeers.Web.Bootstrapper(); 
+            var bs = new Org.NerdBeers.Specs.Modules.SpecBootStrapper();
             bs.Initialise();
             Engine = bs.GetEngine();
-            NerdBeers.Web.Modules.NerdBeerModule._db = DB=GetMockDB();
+            DB = bs.DB;
             Req = null;
-        }
-
-        static dynamic GetMockDB()
-        {
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Org.NerdBeers.Specs.Modules._TestDatabase.xml"))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string result = reader.ReadToEnd().Replace("/2010 ","/"+DateTime.Now.Year.ToString()+" ");
-                MockHelper.UseMockAdapter(new XmlMockAdapter(result));
-                return Database.Default;
-            }
         }
 
         protected static void ProcessRequest()

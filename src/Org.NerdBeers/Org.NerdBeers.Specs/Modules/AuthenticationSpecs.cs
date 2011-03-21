@@ -10,7 +10,7 @@ namespace Org.NerdBeers.Specs.Modules
 {
     public class Login_with_a_cookie : with_NerdBeersContext
     {
-        Establish context = () => 
+        Establish context = () =>
         {
             Req = new Nancy.Request("POST", "/", "text/html");
         };
@@ -24,7 +24,7 @@ namespace Org.NerdBeers.Specs.Modules
     {
         Establish context = () =>
         {
-            Req = new Nancy.Request("POST", "/login", "text/html");
+            Req = new Nancy.Request("POST", "/authentication/login", "text/html");
             Req.Form.Email = "a@b.com";
             Req.Form.Password = "secret";
         };
@@ -40,7 +40,7 @@ namespace Org.NerdBeers.Specs.Modules
     {
         Establish context = () =>
         {
-            Req = new Nancy.Request("POST", "/login", "text/html");
+            Req = new Nancy.Request("POST", "/authentication/login", "text/html");
             Req.Form.Email = "a@b.com";
             Req.Form.Password = "wrongsecret";
         };
@@ -56,7 +56,7 @@ namespace Org.NerdBeers.Specs.Modules
     {
         Establish context = () =>
         {
-            Req = new Nancy.Request("POST", "/login", "text/html");
+            Req = new Nancy.Request("POST", "/authentication/login", "text/html");
             Req.Form.Email = "c@d.com";
             Req.Form.Password = "wrongsecret";
         };
@@ -73,7 +73,7 @@ namespace Org.NerdBeers.Specs.Modules
         Establish context = () =>
         {
             Req.Cookies["NerdGuid"] = DB.Nerds.FindById(1).Guid;
-            Req = new Nancy.Request("POST", "/logout", "text/html");
+            Req = new Nancy.Request("POST", "/authentication/logout", "text/html");
         };
         Because of = () => ProcessRequest();
 

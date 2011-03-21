@@ -36,6 +36,9 @@
     <Reference Include="Nancy">
       <HintPath>..\..\Dependencies\Nancy\Nancy.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Authentication.Forms">
+      <HintPath>..\..\Dependencies\Nancy\Nancy.Authentication.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\..\Dependencies\Nancy\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
@@ -98,10 +101,14 @@
     <Compile Include="Models\BeerEvent.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Nerd.cs" />
+    <Compile Include="Modules\AuthenticationModule.cs" />
     <Compile Include="Modules\BeerEventModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\_NerdBeerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\DBFactory.cs" />
+    <Compile Include="Services\UsernameMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\shared\application.spark">

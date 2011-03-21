@@ -6,12 +6,25 @@ namespace Org.NerdBeers.Web
     using System.Linq;
     using Nancy;
     using Nancy.Responses;
+    using Nancy.Authentication.Forms;
+    using Org.NerdBeers.Web.Services;
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
         protected override void InitialiseInternal(TinyIoC.TinyIoCContainer container)
         {
             base.InitialiseInternal(container);
+            var formsAuthConfiguration =
+                new FormsAuthenticationConfiguration()
+                {
+                    Passphrase = "SuperSecretPass",
+                    Salt = "AndVinegarCrisps",
+                    HmacPassphrase = "UberSuperSecure",
+                    RedirectUrl = "/authentication/login",
+                    UsernameMapper = container.Resolve<IUsernameMapper>(),
+                };
+
+            FormsAuthentication.Enable(this, formsAuthConfiguration);
 
             BeforeRequest += ctx =>
             {

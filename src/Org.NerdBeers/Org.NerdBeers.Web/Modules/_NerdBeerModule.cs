@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Dynamic;
 using System.Linq;
 using Nancy;
 using Org.NerdBeers.Web.Models;
+using Org.NerdBeers.Web.Services;
 using Simple.Data;
 
 
@@ -14,14 +14,20 @@ namespace Org.NerdBeers.Web.Modules
     {
      
         public dynamic Model = new ExpandoObject();
+
+        protected dynamic DB;
        
-        public NerdBeerModule()
+        public NerdBeerModule(IDBFactory DBFactory)
         {
+            DB = DBFactory.DB();
             SetupModelDefaults();
+
         }
 
-        public NerdBeerModule(string modulepath) : base(modulepath)
+        public NerdBeerModule(string modulepath, IDBFactory DBFactory)
+            : base(modulepath)
         {
+            DB = DBFactory.DB();
             SetupModelDefaults();
         }
 
@@ -51,28 +57,5 @@ namespace Org.NerdBeers.Web.Modules
             return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
         }
 
-        public static dynamic _db;
-
-        public dynamic DB 
-        {
-            get
-            {
-                if (_db == null)
-                {
-                    var c = System.Web.HttpContext.Current;
-                    var s = ConfigurationManager.ConnectionStrings["NerdBeers"];
-
-                    if (string.IsNullOrWhiteSpace(s.ConnectionString))
-                    {
-                        _db= Simple.Data.Database.OpenFile(c.Server.MapPath("~/App_data/Nerdbeers.sdf"));
-                    }
-                    else
-                    {
-                        _db= Simple.Data.Database.OpenConnection(s.ConnectionString);
-                    }
-                }
-                return _db;
-            }
-        }
     }
 }
