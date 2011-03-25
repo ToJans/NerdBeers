@@ -89,11 +89,10 @@
     <Content Include="App_Data\NerdBeers.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BuildNerdDb.SQLCE.DDL">
+    <Content Include="BuildNerdDb.SQLCE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BuildNerdDb.SQLite.DDL">
-      <SubType>Designer</SubType>
+    <Content Include="BuildNerdDb.SQLite.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MainLayout.css">

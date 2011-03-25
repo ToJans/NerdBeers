@@ -43,7 +43,7 @@ namespace Org.NerdBeers.Web.Modules
                 Model.Title = "NerdBeers";
                 IEnumerable<BeerEvent> ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
                 Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
-                Model.SubscribedEvents = DB.BeerEvents.FindAll();//(DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id).Cast<BeerEvent>();
+                Model.SubscribedEvents = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id).Cast<BeerEvent>();
                 return null;
             });
             After.AddItemToEndOfPipeline(ctx => 
