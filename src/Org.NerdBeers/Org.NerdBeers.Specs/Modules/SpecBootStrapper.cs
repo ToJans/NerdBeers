@@ -34,8 +34,8 @@ namespace Org.NerdBeers.Specs.Modules
         static string InitSqlDb = null;
         [ThreadStatic]
         static string fname = 
-            GetFullPath(System.Threading.Thread.CurrentThread.ManagedThreadId.ToString()+ ".db"); //file
-            //":memory:"; // inmem
+            //GetFullPath(System.Threading.Thread.CurrentThread.ManagedThreadId.ToString()+ ".db"); //file
+            ":memory:"; // inmem
         [ThreadStatic]
         static string constring = string.Format("Data Source = {0}; Version = 3;", fname);
 

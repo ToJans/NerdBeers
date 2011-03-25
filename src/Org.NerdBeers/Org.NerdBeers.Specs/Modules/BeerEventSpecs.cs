@@ -66,8 +66,7 @@ namespace Org.NerdBeers.Specs.Modules
 
     public class Modify_a_BeerEvent : with_NerdBeersContext 
     {
-        static DateTime refdate = DateTime.Now;
-        static TimeSpan timetolerance = TimeSpan.FromMinutes(1);
+        static DateTime refdate = DateTime.Today;
 
         Establish context = () =>
         {
@@ -91,7 +90,7 @@ namespace Org.NerdBeers.Specs.Modules
             () => ((BeerEvent)DB.BeerEvents.FindById(1)).Location.ShouldEqual("Everywhere");
         
         It should_have_modified_the_eventdate_in_the_db =
-            () => ((BeerEvent)DB.BeerEvents.FindById(1)).EventDate.ShouldBeCloseTo(refdate,timetolerance);
+            () => ((BeerEvent)DB.BeerEvents.FindById(1)).EventDate.ShouldEqual(refdate);
     }
 
     public class Delete_a_BeerEvent_without_subscribers : with_NerdBeersContext 
@@ -131,7 +130,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
 
     //FIXME
-    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
+    [Ignore]//("Switch to @notmyself simple.data in order to support inmemory SQLite")
     public class Subscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
         Establish context = () =>
@@ -151,7 +150,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
 
     //FIXME
-    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
+    [Ignore]//("Switch to @notmyself simple.data in order to support inmemory SQLite")
     public class Unsubscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
         Establish context = () =>
@@ -169,7 +168,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
 
     //FIXME
-    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
+    [Ignore]//("Switch to @notmyself simple.data in order to support inmemory SQLite")
     public class Add_a_Comment : with_NerdBeersContext 
     {
         Establish context = () =>
@@ -208,7 +207,7 @@ namespace Org.NerdBeers.Specs.Modules
     }
     
     //FIXME
-    [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
+    [Ignore]//("Switch to @notmyself simple.data in order to support inmemory SQLite")
     public class Remove_a_comment_which_is_not_from_the_current_user : with_NerdBeersContext 
     {
 
