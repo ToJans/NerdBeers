@@ -8,8 +8,6 @@ namespace Org.NerdBeers.Specs.Modules
     {
         Establish context = () =>
         {
-            InitNerdBeers();
-
             Req = new Request("GET", "/", "text/html");
         };
 

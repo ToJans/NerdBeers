@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Nancy;
-using Simple.Data.Mocking;
-using Simple.Data;
-using System.IO;
-using System.Reflection;
-using System.Dynamic;
+﻿using System.IO;
 using Machine.Specifications;
+using Nancy;
+using System;
 
 namespace Org.NerdBeers.Specs.Modules
 {
     public abstract class with_NerdBeersContext
     {
+        [ThreadStatic]
         static INancyEngine Engine;
+        [ThreadStatic]
         protected static Request Req;
+        [ThreadStatic]
         protected static NancyContext ctx;
+        [ThreadStatic]
         protected static dynamic DB;
+        [ThreadStatic]
         protected static string RenderedContent;
 
         Establish context = () => InitNerdBeers();
 
-        protected static void InitNerdBeers()
+        static void InitNerdBeers()
         {
+            SQLiteDBFactory.ResetDB();
             var bs = new Org.NerdBeers.Specs.Modules.SpecBootStrapper();
             bs.Initialise();
             Engine = bs.GetEngine();

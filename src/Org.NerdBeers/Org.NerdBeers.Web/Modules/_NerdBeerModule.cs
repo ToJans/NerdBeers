@@ -15,11 +15,12 @@ namespace Org.NerdBeers.Web.Modules
      
         public dynamic Model = new ExpandoObject();
 
-        protected dynamic DB;
+        IDBFactory DBFactory;
+        protected dynamic DB { get { return DBFactory.DB(); } }
        
         public NerdBeerModule(IDBFactory DBFactory)
         {
-            DB = DBFactory.DB();
+            this.DBFactory = DBFactory;
             SetupModelDefaults();
 
         }
@@ -27,7 +28,7 @@ namespace Org.NerdBeers.Web.Modules
         public NerdBeerModule(string modulepath, IDBFactory DBFactory)
             : base(modulepath)
         {
-            DB = DBFactory.DB();
+            this.DBFactory = DBFactory;
             SetupModelDefaults();
         }
 
@@ -42,7 +43,7 @@ namespace Org.NerdBeers.Web.Modules
                 Model.Title = "NerdBeers";
                 IEnumerable<BeerEvent> ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
                 Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
-                Model.SubscribedEvents = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid).Cast<BeerEvent>();
+                Model.SubscribedEvents = DB.BeerEvents.FindAll();//(DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id).Cast<BeerEvent>();
                 return null;
             });
             After.AddItemToEndOfPipeline(ctx => 

@@ -46,14 +46,24 @@
     <Reference Include="Simple.Data">
       <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Simple.Data.Mocking">
-      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.Mocking.dll</HintPath>
+    <Reference Include="Simple.Data.AdapterApi">
+      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.AdapterApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Ado, Version=0.5.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.Data.Sqlite">
+      <HintPath>..\..\Dependencies\Simple.Data\Simple.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="Spark">
       <HintPath>..\..\Dependencies\Nancy\Spark.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\Dependencies\Simple.Data\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -79,19 +89,8 @@
     <EmbeddedResource Include="Modules\_TestDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\beerevents_detail.spark">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\root_index.spark">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\shared\application.spark">
+    <Content Include="..\..\Dependencies\Simple.Data\sqlite3.dll">
+      <Link>sqlite3.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

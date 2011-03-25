@@ -11,11 +11,12 @@ namespace Org.NerdBeers.Web.Services
 
     public class AuthenticationService : IAuthenticationService
     {
-        dynamic DB;
+        IDBFactory DBFactory;
+        dynamic DB { get { return DBFactory.DB(); } }
 
         public AuthenticationService(IDBFactory DBFactory)
         {
-            this.DB = DBFactory.DB();
+            this.DBFactory = DBFactory;
         }
 
         public Nerd GetLogin(string usernameoremail, string password)

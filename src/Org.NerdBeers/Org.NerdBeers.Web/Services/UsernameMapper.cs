@@ -9,11 +9,12 @@ namespace Org.NerdBeers.Web.Services
 {
     public class UsernameMapper : IUsernameMapper
     {
-        dynamic DB;
+        IDBFactory DBFactory;
+        dynamic DB { get { return DBFactory.DB(); } }
 
         public UsernameMapper(IDBFactory DBFactory)
         {
-            this.DB = DBFactory.DB();
+            this.DBFactory = DBFactory;
         }
 
         public string GetUsernameFromIdentifier(Guid indentifier)
