@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Modules\BeerEventSpecs.cs" />
     <Compile Include="Modules\AuthenticationSpecs.cs" />
+    <Compile Include="Modules\DbContext.cs" />
     <Compile Include="Modules\SpecBootStrapper.cs" />
     <Compile Include="Modules\_with_NerdBeersContext.cs" />
     <Compile Include="Modules\RootSpecs.cs" />
