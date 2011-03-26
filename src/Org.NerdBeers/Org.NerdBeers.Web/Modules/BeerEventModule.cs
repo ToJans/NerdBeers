@@ -16,7 +16,7 @@ namespace Org.NerdBeers.Web.Modules
             // Read single
             Get["/single/{Id}"] = x =>
             {
-                int id = x.Id;
+                Int64 id = x.Id;
                 IEnumerable<dynamic> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id); 
                 Model.BeerEvent = DB.BeerEvents.FindById(id);
                 Model.Subscribers = subscribedNerds;

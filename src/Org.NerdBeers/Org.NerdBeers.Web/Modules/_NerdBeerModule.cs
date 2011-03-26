@@ -21,7 +21,7 @@ namespace Org.NerdBeers.Web.Modules
         protected dynamic DB { get { return Model.DB; } }
 
         // Route helper
-        protected dynamic RedirectToBeerEvent(int id)
+        protected dynamic RedirectToBeerEvent(Int64 id)
         {
             return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
         }

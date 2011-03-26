@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications">
-      <HintPath>..\..\Dependencies\machine.specifications\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5c474de7a495cff1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Tools\Mspec\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\Dependencies\Nancy\Nancy.dll</HintPath>
@@ -76,6 +77,7 @@
     <Compile Include="Helpers\TestDBFactory.cs" />
     <Compile Include="Modules\BeerEventSpecs.cs" />
     <Compile Include="Modules\AuthenticationSpecs.cs" />
+    <Compile Include="Modules\DbContext.cs" />
     <Compile Include="Modules\_with_NerdBeersContext.cs" />
     <Compile Include="Modules\RootSpecs.cs" />
     <Compile Include="NotMyselfSqliteTest.cs" />
