@@ -41,8 +41,13 @@ namespace Org.NerdBeers.Web.Modules
                 Model.Nerd = DB.Nerds.FindByGuid(guid) ?? DB.Nerds.Insert(Name: "John Doe", Guid: guid);
                 Model.Title = "NerdBeers";
                 IEnumerable<BeerEvent> ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
-                Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
-                Model.SubscribedEvents = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid).Cast<BeerEvent>();
+                var upcoming = ube.OrderBy(e => e.EventDate).Take(10);
+                Model.UpcomingEvents = upcoming;
+                Model.HasUpcoming = upcoming.Any();
+                IEnumerable<BeerEvent> subscriptions = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid).Cast<BeerEvent>();
+                Model.SubscribedEvents = subscriptions;
+                Model.HasSubscriptions = subscriptions.Any();
+
                 return null;
             });
             After.AddItemToEndOfPipeline(ctx => 

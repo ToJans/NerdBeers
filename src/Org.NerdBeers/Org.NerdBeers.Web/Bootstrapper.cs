@@ -34,7 +34,7 @@ namespace Org.NerdBeers.Web
                 var staticFileExtensions =
                     new Dictionary<string, string>
                     {
-                        { "jpg", "image/jpg" },
+                        { "jpg", "image/jpeg" },
                         { "png", "image/png" },
                         { "gif", "image/gif" },
                         { "css", "text/css" },
