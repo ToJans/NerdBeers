@@ -11,14 +11,13 @@ namespace Org.NerdBeers.Web.Modules
     public class BeerEventModule : NerdBeerModule
     {
 
-        public BeerEventModule(IDBFactory DBFactory)
-            : base("/BeerEvents",DBFactory)
+        public BeerEventModule(): base("/BeerEvents")
         {
             // Read single
             Get["/single/{Id}"] = x =>
             {
                 int id = x.Id;
-                IEnumerable<Nerd> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).Cast<Nerd>(); 
+                IEnumerable<dynamic> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id); 
                 Model.BeerEvent = DB.BeerEvents.FindById(id);
                 Model.Subscribers = subscribedNerds;
                 Model.CanSubscribe = !subscribedNerds.Any(n=>n.Guid == Model.Nerd.Guid);

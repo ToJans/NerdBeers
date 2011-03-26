@@ -8,35 +8,26 @@ namespace Org.NerdBeers.Web.Services
 {
     public interface IDBFactory
     {
-        dynamic DB();
+        dynamic DB { get; }
     }
 
     public class DBFactory : IDBFactory
     {
         public DBFactory()
         {
-        }
+            var c = System.Web.HttpContext.Current;
+            var s = ConfigurationManager.ConnectionStrings["NerdBeers"];
 
-        protected dynamic _db=null;
-
-        public dynamic DB()
-        {
-            if (_db == null)
+            if (string.IsNullOrWhiteSpace(s.ConnectionString))
             {
-                var c = System.Web.HttpContext.Current;
-                var s = ConfigurationManager.ConnectionStrings["NerdBeers"];
-
-                if (string.IsNullOrWhiteSpace(s.ConnectionString))
-                {
-                    return Simple.Data.Database.OpenFile(c.Server.MapPath("~/App_data/Nerdbeers.sdf"));
-                }
-                else
-                {
-                    return Simple.Data.Database.OpenConnection(s.ConnectionString);
-                }
+                DB = Simple.Data.Database.OpenFile(c.Server.MapPath("~/App_data/Nerdbeers.sdf"));
             }
-            return _db;
+            else
+            {
+                DB = Simple.Data.Database.OpenConnection(s.ConnectionString);
+            }
         }
 
+        public dynamic DB { get; protected set; }
     }
 }

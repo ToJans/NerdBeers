@@ -14,8 +14,8 @@ namespace Org.NerdBeers.Web.Modules
         IAuthenticationService authenticationservice;
         IUsernameMapper usernameMapper;
 
-        public AuthenticationModule(IAuthenticationService authenticationservice,IUsernameMapper usernameMapper,IDBFactory DBFactory)
-            : base("/authentication",DBFactory)
+        public AuthenticationModule(IAuthenticationService authenticationservice,IUsernameMapper usernameMapper)
+            : base("/authentication")
         {
             Post["/login"] = x =>
             {

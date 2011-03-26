@@ -11,7 +11,8 @@ namespace Org.NerdBeers.Specs.Modules
             Req = new Request("GET", "/", "text/html");
         };
 
-        Because of = () => ProcessRequest();
+        Because of = 
+            () => ProcessRequest();
 
         It should_display_a_welcome_message =
             () => RenderedContent.ShouldContain("Welcome");
@@ -21,5 +22,6 @@ namespace Org.NerdBeers.Specs.Modules
 
         It should_display_events_you_registered_for = 
             () => RenderedContent.ShouldContain("events you subscribed to");
+
     }
 }

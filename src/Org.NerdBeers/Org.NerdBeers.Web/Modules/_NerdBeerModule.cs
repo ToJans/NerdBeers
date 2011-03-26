@@ -12,45 +12,13 @@ namespace Org.NerdBeers.Web.Modules
 {
     public abstract class NerdBeerModule : NancyModule
     {
-     
-        public dynamic Model = new ExpandoObject();
+        public NerdBeerModule():base() { }
 
-        IDBFactory DBFactory;
-        protected dynamic DB { get { return DBFactory.DB(); } }
-       
-        public NerdBeerModule(IDBFactory DBFactory)
-        {
-            this.DBFactory = DBFactory;
-            SetupModelDefaults();
+        public NerdBeerModule(string modulePath) : base(modulePath) { }
 
-        }
+        protected dynamic Model { get { return base.Context.Items["Model"]; } }
 
-        public NerdBeerModule(string modulepath, IDBFactory DBFactory)
-            : base(modulepath)
-        {
-            this.DBFactory = DBFactory;
-            SetupModelDefaults();
-        }
-
-        private void SetupModelDefaults()
-        {
-            Before.AddItemToEndOfPipeline(ctx =>
-            {
-                var guid = System.Guid.NewGuid().ToString();
-                if (Request.Cookies.ContainsKey("NerdGuid")) guid = Request.Cookies["NerdGuid"];
-                Model.NerdGuid = guid;
-                Model.Nerd = DB.Nerds.FindByGuid(guid) ?? DB.Nerds.Insert(Name: "John Doe", Guid: guid);
-                Model.Title = "NerdBeers";
-                IEnumerable<BeerEvent> ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
-                Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
-                Model.SubscribedEvents = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id).Cast<BeerEvent>();
-                return null;
-            });
-            After.AddItemToEndOfPipeline(ctx => 
-            {
-                ctx.Response.AddCookie("NerdGuid",Model.NerdGuid);
-            });
-        }
+        protected dynamic DB { get { return Model.DB; } }
 
         // Route helper
         protected dynamic RedirectToBeerEvent(int id)

@@ -12,7 +12,7 @@ namespace Org.NerdBeers.Web.Models
             Guid = System.Guid.NewGuid().ToString();
         }
 
-        public int Id {get;set;}
+        public Int64 Id {get;set;}
         public string Name { get; set; }
         public string Guid { get; set; }
         public string Email {get;set;}

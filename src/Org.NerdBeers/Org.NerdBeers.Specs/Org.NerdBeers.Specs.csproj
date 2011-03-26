@@ -72,11 +72,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\FileHelpers.cs" />
+    <Compile Include="Helpers\TestDBFactory.cs" />
     <Compile Include="Modules\BeerEventSpecs.cs" />
     <Compile Include="Modules\AuthenticationSpecs.cs" />
-    <Compile Include="Modules\SpecBootStrapper.cs" />
     <Compile Include="Modules\_with_NerdBeersContext.cs" />
     <Compile Include="Modules\RootSpecs.cs" />
+    <Compile Include="NotMyselfSqliteTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +93,7 @@
   <ItemGroup>
     <Content Include="..\..\Dependencies\Simple.Data\sqlite3.dll">
       <Link>sqlite3.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
