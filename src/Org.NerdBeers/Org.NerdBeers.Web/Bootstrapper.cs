@@ -28,6 +28,7 @@ namespace Org.NerdBeers.Web
             if (DBFact != null)
                 container.Register<IDBFactory>(DBFact);
             container.Register<IUsernameMapper, UsernameMapper>();
+            DBFact = container.Resolve<IDBFactory>();
 
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration()
@@ -53,7 +54,7 @@ namespace Org.NerdBeers.Web
             var staticFileExtensions =
                 new Dictionary<string, string>
                     {
-                        { "jpg", "image/jpg" },
+                        { "jpg", "image/jpeg" },
                         { "png", "image/png" },
                         { "gif", "image/gif" },
                         { "css", "text/css" },
@@ -96,9 +97,12 @@ namespace Org.NerdBeers.Web
             Model.NerdGuid = guid;
             Model.Nerd = DBFact.DB.Nerds.FindByGuid(guid) ?? DBFact.DB.Nerds.Insert(Name: "John Doe", Guid: guid);
             Model.Title = "NerdBeers";
-           // IEnumerable<dynamic> ube = DBFact.DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
-            Model.UpcomingEvents = new dynamic[]{};//ube.OrderBy(e => e.EventDate).Take(10);
-            Model.SubscribedEvents = new dynamic[] { };//DBFact.DB.BeerEvents.FindAll(DBFact.DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id);
+            IEnumerable<dynamic> ube = DBFact.DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
+            Model.HasUpcoming = ube.Any();
+            Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
+            IEnumerable<dynamic> subscriptions = DBFact.DB.BeerEvents.FindAll(DBFact.DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id);
+            Model.HasSubscriptions = subscriptions.Any();
+            Model.SubscribedEvents = subscriptions;
             ctx.Items["Model"] = Model;
             return null;
         }

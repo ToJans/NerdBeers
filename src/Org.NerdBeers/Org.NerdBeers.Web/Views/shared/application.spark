@@ -3,41 +3,81 @@
 <html>
   <head>
     <title>Nerdbeers</title>
-    <link href="mainlayout.css" rel="stylesheet" type="text/css" />
+    <link href="/content/mainlayout.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div id="sidebar" style="">
-      <h3>Add a NerdBeer event</h3>
-      <form method="POST" action="/BeerEvents/create">
-        <label for="Name">Name</label>
-        <input type="text" name="Name" />
-        <label for="Location">Location</label>
-        <input type="text" name="Location" />
-        <label for="EventDate">Date</label>
-        <input type="text" name="EventDate" value="${System.DateTime.Now.AddDays(5)}"/>
-        <input type="submit"/>
-      </form>
-      <hr/>
-      <h3>
-        Upcoming Nerdbeers
-      </h3>
-      <ul>
-        <li each="var v in m.UpcomingEvents">
-          <a href="/BeerEvents/single/${v.Id}"> ${v.Name} - ${v.Location} </a> ${v.EventDate}
-        </li>
-      </ul>
+    <div id="header">
+      <div class="contentblock">
+        <h1>NerdBeers</h1>
+        <img src="/Content/logo.png" alt="NerdBeers"/>
+
+        <div id="menuholder">
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div id="othersidebar" style="">
-      <h3>NerdBeer events you subscribed to:</h3>
-      <ul>
-        <li each="var v in m.SubscribedEvents">
-          <a href="/BeerEvents/single/${v.Id}"> ${v.Name} - ${v.Location} </a> ${v.EventDate}
-        </li>
-      </ul>
+
+    <div id="content">
+      <div class="contentblock">
+        <div id="createandupcomingcolumn">
+          <div class="floatingwindow">
+            <span class="title">Add a NerdBeer Event</span>
+            <span class="body">
+              <form method="POST" action="/BeerEvents/create">
+                <label for="Name">Name</label>
+                <input type="text" name="Name" />
+                <label for="Location">Location</label>
+                <input type="text" name="Location" />
+                <label for="EventDate">Date</label>
+                <input type="text" name="EventDate" value="${System.DateTime.Now.AddDays(5)}"/>
+                <input type="submit"/>
+              </form>
+            </span>
+          </div>
+          
+          <div class="floatingwindow" if="(m.HasUpcoming)">
+            <span class="title">Upcoming Nerdbeers</span>
+            <span class="body">
+              <ul>
+                <li each="var v in m.UpcomingEvents">
+                  <span>${v.EventDate.ToShortDateString()}</span>
+                  <a href="/BeerEvents/single/${v.Id}"> ${v.Name} - ${v.Location}</a>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+
+        <div id="maincontentcolumn">
+          <use content="body"/>
+        </div>
+
+        <div id="subscribedcolumn" if="(m.HasSubscriptions)">
+          <div class="floatingwindow">
+            <span class="title">Your Subscribed Events</span>
+            <span class="body">
+              <ul>
+                <li each="var v in m.SubscribedEvents">
+                  <span>${v.EventDate.ToShortDateString()}</span>
+                  <a href="/BeerEvents/single/${v.Id}"> ${v.Name} - ${v.Location}</a>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+        
+      </div>
     </div>
-    <div id="maincontent">
-      <use content="body"/>
+
+    <div id="footer">
+      <use content="foot"/>
     </div>
-    <use content="foot"/>
   </body>
 </html>

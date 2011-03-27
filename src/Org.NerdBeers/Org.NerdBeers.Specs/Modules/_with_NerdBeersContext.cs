@@ -40,7 +40,6 @@ namespace Org.NerdBeers.Specs.Modules
             cmd.ExecuteNonQuery();
 
             bs = new Bootstrapper();
-            bs.DBFact = dbf;
             bs.Initialise();
             Engine = bs.GetEngine();
 

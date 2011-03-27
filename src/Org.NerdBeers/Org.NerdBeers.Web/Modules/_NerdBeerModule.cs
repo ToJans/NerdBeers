@@ -13,8 +13,7 @@ namespace Org.NerdBeers.Web.Modules
     public abstract class NerdBeerModule : NancyModule
     {
         public NerdBeerModule():base() { }
-
-        public NerdBeerModule(string modulePath) : base(modulePath) { }
+        public NerdBeerModule(string modulepath) : base(modulepath){}
 
         protected dynamic Model { get { return base.Context.Items["Model"]; } }
 
