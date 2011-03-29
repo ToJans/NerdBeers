@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Machine.Specifications, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5c474de7a495cff1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Tools\Mspec\Machine.Specifications.dll</HintPath>
+      <HintPath>..\..\..\Tools\machine.specifications\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\Dependencies\Nancy\Nancy.dll</HintPath>
@@ -88,9 +88,6 @@
       <Project>{4BAB948C-A50B-4503-A883-13D9F5C862A1}</Project>
       <Name>Org.NerdBeers.Web</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Modules\_TestDatabase.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\Dependencies\Simple.Data\sqlite3.dll">
