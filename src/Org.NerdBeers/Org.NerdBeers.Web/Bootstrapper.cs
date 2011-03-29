@@ -15,9 +15,14 @@ namespace Org.NerdBeers.Web
     public class Bootstrapper : DefaultNancyBootstrapper
     {
         // FIXME workaround sinds IOC seems to give problems with inmemorydb
-        public IDBFactory DBFact = null;
+        IDBFactory dbFact = null;
 
-        public Bootstrapper()
+        public Bootstrapper(IDBFactory dbFact)
+        {
+            this.dbFact = dbFact;
+        }
+
+        public Bootstrapper() : this (new DBFactory())
         {
         }
 
@@ -25,10 +30,10 @@ namespace Org.NerdBeers.Web
         {
             base.InitialiseInternal(container);
 
-            if (DBFact != null)
-                container.Register<IDBFactory>(DBFact);
+            if (dbFact != null)
+                container.Register<IDBFactory>(dbFact);
             container.Register<IUsernameMapper, UsernameMapper>();
-            DBFact = container.Resolve<IDBFactory>();
+            dbFact = container.Resolve<IDBFactory>();
 
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration()
@@ -92,15 +97,15 @@ namespace Org.NerdBeers.Web
         {
             var guid = System.Guid.NewGuid().ToString();
             dynamic Model = new ExpandoObject();
-            Model.DB = DBFact.DB;
+            Model.DB = dbFact.DB;
             if (ctx.Request.Cookies.ContainsKey("NerdGuid")) guid = ctx.Request.Cookies["NerdGuid"];
             Model.NerdGuid = guid;
-            Model.Nerd = DBFact.DB.Nerds.FindByGuid(guid) ?? DBFact.DB.Nerds.Insert(Name: "John Doe", Guid: guid);
+            Model.Nerd = dbFact.DB.Nerds.FindByGuid(guid) ?? dbFact.DB.Nerds.Insert(Name: "John Doe", Guid: guid);
             Model.Title = "NerdBeers";
-            IEnumerable<dynamic> ube = DBFact.DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
+            IEnumerable<dynamic> ube = dbFact.DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
             Model.HasUpcoming = ube.Any();
             Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
-            IEnumerable<dynamic> subscriptions = DBFact.DB.BeerEvents.FindAll(DBFact.DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id);
+            IEnumerable<dynamic> subscriptions = dbFact.DB.BeerEvents.FindAll(dbFact.DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id);
             Model.HasSubscriptions = subscriptions.Any();
             Model.SubscribedEvents = subscriptions;
             ctx.Items["Model"] = Model;

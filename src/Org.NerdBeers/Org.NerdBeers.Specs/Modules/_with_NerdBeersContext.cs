@@ -39,7 +39,7 @@ namespace Org.NerdBeers.Specs.Modules
             cmd.CommandText = File.ReadAllText(FileHelpers.GetFullPath("BuildNerdDb.SQLite.txt"));
             cmd.ExecuteNonQuery();
 
-            bs = new Bootstrapper();
+            bs = new Bootstrapper(dbf);
             bs.Initialise();
             Engine = bs.GetEngine();
 
