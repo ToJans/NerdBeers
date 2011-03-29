@@ -105,7 +105,7 @@ namespace Org.NerdBeers.Web
             IEnumerable<dynamic> ube = dbFact.DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
             Model.HasUpcoming = ube.Any();
             Model.UpcomingEvents = ube.OrderBy(e => e.EventDate).Take(10);
-            IEnumerable<dynamic> subscriptions = dbFact.DB.BeerEvents.FindAll(dbFact.DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id);
+            IEnumerable<dynamic> subscriptions = new dynamic[] {};//dbFact.DB.BeerEvents.FindAll(dbFact.DB.BeerEvents.NerdSubscriptions.NerdId == Model.Nerd.Id);
             Model.HasSubscriptions = subscriptions.Any();
             Model.SubscribedEvents = subscriptions;
             ctx.Items["Model"] = Model;

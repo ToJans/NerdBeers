@@ -12,6 +12,9 @@ using Simple.Data.Sqlite;
 using System.Collections.Generic;
 using Org.NerdBeers.Web.Models;
 using Org.NerdBeers.Specs.Modules;
+using System.Dynamic;
+using System.Diagnostics;
+using Nancy;
 
 namespace Org.NerdBeers.Specs
 {
@@ -54,24 +57,27 @@ namespace Org.NerdBeers.Specs
         protected static IDbConnection connection;
     }
 
-    public class with_the_db_context : with_NerdBeersContext//DbContext
+    public class with_the_db_context : DbContext
     {
-        Because of = () =>
+        Establish context = () =>
         {
-            beerEvent = DB.BeerEvents.Insert(Name: "Drunkapalooza", Location: "Paddy Coynes", EventDate: DateTime.Today.AddDays(1));
-
-            // 3 times since .Net has a 3-phase garbage collection
-            GC.Collect();
-            GC.Collect();
-            GC.Collect();
-            //ube = db.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
-            ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)));
+            beerEvent = db.BeerEvents.Insert(Name: "Drunkapalooza", Location: "Paddy Coynes", EventDate: DateTime.Today.AddDays(1));
         };
 
-        It should_have_a_result_with_insert = () => 
-            beerEvent.ShouldNotBeNull();
-        It should_have_a_result_with_query = () => 
-            ube.Any().ShouldBeTrue();
+        Because of = () =>
+        {
+            ube = db.BeerEvents.FindAllByName("Drunkapalooza");
+        };
+
+        It should_have_a_result = () => 
+            ube.Count().ShouldBeGreaterThan(0);
+
+        // THIS FAILS !!!
+        It should_allow_another_query = () =>
+        {
+            ube = db.BeerEvents.FindAllByName("Drunkapalooza");
+            ube.Count().ShouldBeGreaterThan(0);
+        };
 
         static object beerEvent;
         protected static IEnumerable<dynamic> ube;
