@@ -10,7 +10,6 @@ namespace Org.NerdBeers.Web.Modules
 {
     public class BeerEventModule : NerdBeerModule
     {
-
         public BeerEventModule(): base("/BeerEvents")
         {
             // Read single
@@ -102,6 +101,11 @@ namespace Org.NerdBeers.Web.Modules
                 if (s != null) DB.NerdSubscriptions.DeleteById(s.Id);
                 return RedirectToBeerEvent(x.eventid);
             };
+        }
+
+        dynamic RedirectToBeerEvent(Int64 id)
+        {
+            return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
         }
 
     }
