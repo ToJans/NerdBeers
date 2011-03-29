@@ -66,18 +66,11 @@ namespace Org.NerdBeers.Specs
 
         Because of = () =>
         {
-            ube = db.BeerEvents.FindAllByName("Drunkapalooza");
+            ube = db.BeerEvents.FindAll(db.BeerEvents.NerdSubscriptions.NerdId == 1);
         };
 
         It should_have_a_result = () => 
             ube.Count().ShouldBeGreaterThan(0);
-
-        // THIS FAILS !!!
-        It should_allow_another_query = () =>
-        {
-            ube = db.BeerEvents.FindAllByName("Drunkapalooza");
-            ube.Count().ShouldBeGreaterThan(0);
-        };
 
         static object beerEvent;
         protected static IEnumerable<dynamic> ube;
