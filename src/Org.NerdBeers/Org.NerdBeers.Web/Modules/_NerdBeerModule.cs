@@ -52,7 +52,7 @@ namespace Org.NerdBeers.Web.Modules
             });
             After.AddItemToEndOfPipeline(ctx => 
             {
-                ctx.Response.AddCookie("NerdGuid",Model.NerdGuid);
+                ctx.Response.AddCookie("NerdGuid",Model.NerdGuid,DateTime.Now.AddYears(1));
             });
         }
 
