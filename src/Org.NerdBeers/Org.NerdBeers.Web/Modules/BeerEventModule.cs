@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nancy;
+using Nancy.ModelBinding;
 using Org.NerdBeers.Web.Models;
 using Org.NerdBeers.Web.Services;
 
@@ -30,12 +31,7 @@ namespace Org.NerdBeers.Web.Modules
             // Create
             Post["/create"] = x =>
             {
-                var be = new BeerEvent()
-                {
-                    Name = Request.Form.Name,
-                    Location = Request.Form.Location,
-                    EventDate = Request.Form.EventDate
-                }; 
+                BeerEvent be = this.Bind();
                 var res = DB.BeerEvents.Insert(be);
                 return RedirectToBeerEvent(res.Id);
             };
@@ -43,13 +39,8 @@ namespace Org.NerdBeers.Web.Modules
             // Update
             Post["/update/{Id}"] = x =>
             {
-                var be = new BeerEvent
-                {
-                    Id = x.Id,
-                    Name = Request.Form.Name,
-                    Location = Request.Form.Location,
-                    EventDate = Request.Form.EventDate
-                };
+                BeerEvent be = this.Bind("id");
+                be.Id = x.Id;
                 DB.BeerEvents.Update(be);
                 return RedirectToBeerEvent(be.Id);
             };
@@ -70,14 +61,11 @@ namespace Org.NerdBeers.Web.Modules
             // Comments
             Post["/{Id}/comments/create"] = x =>
             {
-                var be = new Comment
-                {
-                    NerdId = Model.Nerd.Id,
-                    EventId = x.Id,
-                    CommentText = Request.Form.Comment,
-                    Created = DateTime.Now
-                };
-                DB.Comments.Insert(be);
+                Comment comment = this.Bind("EventId", "NerdId", "Created");
+                comment.EventId = x.Id;
+                comment.Created = DateTime.Now;
+                comment.NerdId = Model.Nerd.Id;
+                DB.Comments.Insert(comment);
                 return RedirectToBeerEvent(x.Id);
             };
 
