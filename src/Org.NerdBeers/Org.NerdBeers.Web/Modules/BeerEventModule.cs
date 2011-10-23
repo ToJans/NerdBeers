@@ -11,7 +11,6 @@ namespace Org.NerdBeers.Web.Modules
 {
     public class BeerEventModule : NerdBeerModule
     {
-
         public BeerEventModule(IDBFactory DBFactory)
             : base("/BeerEvents",DBFactory)
         {

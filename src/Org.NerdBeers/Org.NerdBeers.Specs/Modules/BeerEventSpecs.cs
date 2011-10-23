@@ -7,6 +7,7 @@ using Nancy;
 using Nancy.Responses;
 using Org.NerdBeers.Web.Models;
 using System.Linq.Expressions;
+using Nancy.Testing;
 
 namespace Org.NerdBeers.Specs.Modules
 {
@@ -14,21 +15,21 @@ namespace Org.NerdBeers.Specs.Modules
     {
         static dynamic be;
 
-        Establish context = () => {
-            Req = new Request("GET", "/BeerEvents/single/1", "text/html");
-            be = DB.BeerEvents.FindById(1); 
+        Because of = () =>
+        {
+            result = browser.Get("/BeerEvents/single/1", with => with.HttpRequest());
+            bodytext = result.Body.AsString();
+            be = DB.BeerEvents.FindById(1);
         };
 
-        Because of = () => ProcessRequest();
-
         It should_show_the_name_of_the_event = 
-            () => RenderedContent.ShouldContain((string)be.Name);
+            () => bodytext.ShouldContain((string)be.Name);
 
         It should_show_the_location_of_the_event =
-            () => RenderedContent.ShouldContain((string)be.Location);
+            () => bodytext.ShouldContain((string)be.Location);
 
         It should_show_the_date_of_the_event =
-            () => RenderedContent.ShouldContain(((DateTime)be.EventDate).ToString());
+            () => bodytext.ShouldContain(((DateTime)be.EventDate).ToString());
 
         It should_show_the_subscribed_nerds =
             () => RenderedContentShouldContainAllNerdSubscriptionsForEvent(1);
@@ -37,7 +38,7 @@ namespace Org.NerdBeers.Specs.Modules
         {
             foreach (var b in DB.NerdSubscriptions.FindAllByEventId(id))
             {
-                RenderedContent.ShouldContain((string)DB.Nerds.FindById(b.NerdId).Name);
+                bodytext.ShouldContain((string)DB.Nerds.FindById(b.NerdId).Name);
             }
         }
     }
@@ -46,19 +47,16 @@ namespace Org.NerdBeers.Specs.Modules
     {
         static DateTime refdate = DateTime.Now; 
 
-        Establish context = () =>
-        {
-            Req = new Request("POST", "/BeerEvents/create", "text/html");
-            Req.Form.Name = "TestEvent";
-            Req.Form.Location = "Everywhere";
-            Req.Form.EventDate = refdate;
-        };
+        Because of = () => 
+            result = browser.Post("/BeerEvents/create", with => {
+                with.HttpRequest();
+                with.FormValue("Name","TestEvent");
+                with.FormValue("Location","Everywhere");
+                with.FormValue("EventDate",refdate.ToString());
+            });
 
-        Because of = () => ProcessRequest();
-
-        // TODO how to test the redirect url ?
         It should_redirect_to_the_new_nerd =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/3");
 
         It should_have_created_the_beerevent_in_the_db = 
             () => ((BeerEvent)DB.BeerEvents.FindByName("TestEvent")).ShouldNotBeNull();
@@ -69,20 +67,18 @@ namespace Org.NerdBeers.Specs.Modules
         static DateTime refdate = DateTime.Now;
         static TimeSpan timetolerance = TimeSpan.FromMinutes(1);
 
-        Establish context = () =>
-        {
-            Req = new Request("POST", "/BeerEvents/update/1", "text/html");
-            Req.Form.Id = 1;
-            Req.Form.Name = "TestEvent";
-            Req.Form.Location = "Everywhere";
-            Req.Form.EventDate = refdate;
-        };
-
-        Because of = () => ProcessRequest();
+        Because of = () =>
+            result = browser.Post("/BeerEvents/update/1", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Name", "TestEvent");
+                with.FormValue("Location", "Everywhere");
+                with.FormValue("EventDate", refdate.ToString());
+            });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_new_nerd =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.Context.Response.ShouldBeOfType<RedirectResponse>();
 
         It should_have_modified_the_name_in_the_db =
             () => ((BeerEvent)DB.BeerEvents.FindById(1)).Name.ShouldEqual("TestEvent");
@@ -98,15 +94,18 @@ namespace Org.NerdBeers.Specs.Modules
     {
         Establish context = () =>
         {
-            Req = new Request("GET", "/BeerEvents/delete/1", "text/html");
             DB.NerdSubscriptions.DeleteByEventId(1);
         };
 
-        Because of = () => ProcessRequest();
+        Because of = () =>
+            result = browser.Get("/BeerEvents/delete/1", with =>
+            {
+                with.HttpRequest();
+            });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_root =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.Context.Response.ShouldBeOfType<RedirectResponse>();
 
         It should_have_deleted_the_event =
             () => ((BeerEvent)DB.BeerEvents.FindById(1)).ShouldBeNull(); 
@@ -114,16 +113,16 @@ namespace Org.NerdBeers.Specs.Modules
 
     public class Delete_a_BeerEvent_with_subscribers : with_NerdBeersContext 
     {
-        Establish context = () =>
+        Because of = () =>
+            result = browser.Get("/BeerEvents/delete/1", with =>
             {
-                Req = new Request("GET", "/BeerEvents/delete/1", "text/html");
-            };
+                with.HttpRequest();
+            });
 
-        Because of = () => ProcessRequest();
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
 
         It should_not_have_deleted_the_event =
             () => ((BeerEvent)DB.BeerEvents.FindById(1)).Name.ShouldNotBeNull();
@@ -134,17 +133,16 @@ namespace Org.NerdBeers.Specs.Modules
     [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Subscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
-        Establish context = () =>
-            {
-                DB.NerdSubscriptions.DeleteByEventId(1);
-                Req = new Request("POST", "/BeerEvents/subcribe/1", "text/html");
-                Req.Form.Name = "Juleke";
-            };
-        Because of = () => ProcessRequest();
+        Establish context = () => DB.NerdSubscriptions.DeleteByEventId(1);
+
+        Because of = () => result = browser.Post("/BeerEvents/subcribe/1", with => {
+            with.HttpRequest();
+            with.FormValue("Name", "Juleke");
+        });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
 
         It should_have_subscribed_the_nerd =
             () => ((string)(DB.NerdSubscriptions.FindByEventId(1).Guid)).ShouldEqual("xxx");
@@ -154,15 +152,14 @@ namespace Org.NerdBeers.Specs.Modules
     [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Unsubscribe_current_nerd_for_a_BeerEvent : with_NerdBeersContext 
     {
-        Establish context = () =>
-        {
-            Req = new Request("GET", "/BeerEvents/unsubcribe/1", "text/html");
-        };
-        Because of = () => ProcessRequest();
+        Because of = 
+            () => result = browser.Get("/BeerEvents/unsubcribe/1", with => { 
+                with.HttpRequest(); 
+            });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
 
         It should_have_unsubscribed_the_nerd =
             () => ((IEnumerable<dynamic>)DB.NerdSubscriptions.FindAllByEventIdAndNerdId(1,1)).Count().ShouldEqual(0);
@@ -172,17 +169,14 @@ namespace Org.NerdBeers.Specs.Modules
     [Ignore("Switch to @notmyself simple.data in order to support inmemory SQLite")]
     public class Add_a_Comment : with_NerdBeersContext 
     {
-        Establish context = () =>
-        {
-            Req = new Request("POST", "/BeerEvents/1/comments/create", "text/html");
-            Req.Form.CommentText = "w00t comment";
-        };
-
-        Because of = () => ProcessRequest();
+        Because of = () => result = browser.Post("/BeerEvents/1/comments/create",with=>{
+            with.HttpRequest();
+            with.FormValue("CommentText","w00t comment");
+        });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
 
         It should_have_added_the_comment =
             () => ((IEnumerable<dynamic>)DB.Comments.FindAllByCommentText("w00t comment")).Count().ShouldEqual(1);
@@ -191,19 +185,16 @@ namespace Org.NerdBeers.Specs.Modules
 
     public class Remove_an_own_comment : with_NerdBeersContext 
     {
-        Establish context = () =>
-        {
-            Req = new Request("GET", "/BeerEvents/comments/delete/1", "text/html");
-        };
-
-        Because of = () => ProcessRequest();
+        Because of = () => result = browser.Get("/BeerEvents/comments/delete/1",with => {
+            with.HttpRequest();
+        });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
 
         It should_have_removed_the_comment =
-            () => ((IEnumerable<dynamic>)DB.Comments.FindAllByCommentId(1)).Count().ShouldEqual(0);
+            () => DB.Comments.FindAllByCommentId(1).Count().ShouldEqual(0);
  
     }
     
@@ -212,18 +203,16 @@ namespace Org.NerdBeers.Specs.Modules
     public class Remove_a_comment_which_is_not_from_the_current_user : with_NerdBeersContext 
     {
 
-        Establish context = () =>
+        Because of = () => result = browser.Get("/BeerEvents/comments/delete/2", with =>
         {
-            Req = new Request("GET", "/BeerEvents/comments/delete/2", "text/html");
-        };
-
-        Because of = () => ProcessRequest();
+            with.HttpRequest();
+        });
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => ctx.Response.ShouldBeOfType<RedirectResponse>();
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
 
-        It should_have_removed_the_comment =
-            () => ((IEnumerable<dynamic>)DB.Comments.FindByCommentId(2)).Count().ShouldEqual(1);
+        It should_not_have_removed_the_comment =
+            () => DB.Comments.FindAllByCommentId(2).Count().ShouldBe(1);
     }
 }
