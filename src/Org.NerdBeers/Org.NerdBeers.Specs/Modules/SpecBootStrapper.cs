@@ -3,13 +3,14 @@ using System.IO;
 using System.Reflection;
 using Nancy.Authentication.Forms;
 using Org.NerdBeers.Web.Services;
-using Simple.Data.Mocking;
+using Simple.Data.Sqlite;
+using Simple.Data;
 
 namespace Org.NerdBeers.Specs.Modules
 {
-    class SpecBootStrapper : NerdBeers.Web.Bootstrapper
+    class SpecBootStrapper : NerdBeers.Web.Bootstrapper,IDisposable
     {
-        IDBFactory fact = new CustomDBFactory();
+        CustomDBFactory fact = new CustomDBFactory();
 
         protected override void ConfigureApplicationContainer(TinyIoC.TinyIoCContainer container)
         {
@@ -24,25 +25,42 @@ namespace Org.NerdBeers.Specs.Modules
                 return fact.DB();
             }
         }
+
+        public void Dispose()
+        {
+            fact.Dispose();
+        }
     }
 
-    class CustomDBFactory : IDBFactory
+    class CustomDBFactory : IDBFactory,IDisposable
     {
         bool IsInitialized = false;
+
+        const string connectionString = "Data Source=:memory:";
+        IInMemoryDbConnection connection;
+        dynamic db;
 
         public dynamic DB()
         {
             if (!IsInitialized)
             {
-                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Org.NerdBeers.Specs.Modules._TestDatabase.xml"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string result = reader.ReadToEnd().Replace("/2010 ", "/" + DateTime.Now.Year.ToString() + " ");
-                    MockHelper.UseMockAdapter(new XmlMockAdapter(result));
-                }
+                connection = Database.Opener.OpenMemoryConnection(connectionString);
+                db = Database.OpenConnection(connectionString);
+                var createTableSql = Properties.Resources.CreateSqliteDML;
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = createTableSql;
+                command.ExecuteNonQuery();
                 IsInitialized = true;
             }
-            return Simple.Data.Database.Default;
+            return db;
+        }
+
+        public void Dispose()
+        {
+            connection.Destroy();
+            connection.Dispose();
+            connection = null;
         }
     }
 }
