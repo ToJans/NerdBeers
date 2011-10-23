@@ -113,7 +113,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\shared\application.spark">
+    <Content Include="shared\application.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
