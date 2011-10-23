@@ -40,11 +40,12 @@ namespace Org.NerdBeers.Web.Modules
                 Model.NerdGuid = guid;
                 Model.Nerd = DB.Nerds.FindByGuid(guid) ?? DB.Nerds.Insert(Name: "John Doe", Guid: guid);
                 Model.Title = "NerdBeers";
-                IEnumerable<BeerEvent> ube = DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1))).Cast<BeerEvent>();
-                var upcoming = ube.OrderBy(e => e.EventDate).Take(10);
-                Model.UpcomingEvents = upcoming;
-                Model.HasUpcoming = upcoming.Any();
-                IEnumerable<BeerEvent> subscriptions = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid).Cast<BeerEvent>();
+                var ube = 
+                    DB.BeerEvents.FindAllByEventDate(DateTime.Now.to(DateTime.Now.AddYears(1)))
+                    .OrderBy(DB.BeerEvents.EventDate).Take(10).ToList();
+                Model.UpcomingEvents = ube;
+                Model.HasUpcoming = ube.Count>0;
+                var subscriptions = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid);
                 Model.SubscribedEvents = subscriptions;
                 Model.HasSubscriptions = subscriptions.Any();
 

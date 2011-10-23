@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Nancy;
-using Nancy.Authentication.Forms;
 using Org.NerdBeers.Web.Models;
 using Org.NerdBeers.Web.Services;
+using Nancy.Authentication.Forms;
 
 namespace Org.NerdBeers.Web.Modules
 {
     public class AuthenticationModule : NerdBeerModule
     {
         IAuthenticationService authenticationservice;
-        IUsernameMapper usernameMapper;
 
-        public AuthenticationModule(IAuthenticationService authenticationservice,IUsernameMapper usernameMapper,IDBFactory DBFactory)
+        public AuthenticationModule(IAuthenticationService authenticationservice,IDBFactory DBFactory)
             : base("/authentication",DBFactory)
         {
+            this.authenticationservice = authenticationservice;
+
             Post["/login"] = x =>
             {
                 var nerd = authenticationservice.GetLogin(Request.Form.Username, Request.Form.Password);
@@ -31,6 +32,7 @@ namespace Org.NerdBeers.Web.Modules
                 }
 
                 Guid guid = Guid.Parse(nerd.Guid);
+                
                 return this.LoginAndRedirect(guid, expiry);
             };
 

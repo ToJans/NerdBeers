@@ -19,7 +19,7 @@ namespace Org.NerdBeers.Web.Modules
             Get["/single/{Id}"] = x =>
             {
                 int id = x.Id;
-                IEnumerable<Nerd> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).Cast<Nerd>(); 
+                List<dynamic> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).ToList(); 
                 Model.BeerEvent = DB.BeerEvents.FindById(id);
                 Model.Subscribers = subscribedNerds;
                 Model.CanSubscribe = !subscribedNerds.Any(n=>n.Guid == Model.Nerd.Guid);

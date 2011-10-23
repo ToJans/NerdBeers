@@ -8,25 +8,25 @@ namespace Org.NerdBeers.Web
     using Nancy.Responses;
     using Nancy.Authentication.Forms;
     using Org.NerdBeers.Web.Services;
+    using Nancy.Cryptography;
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
         protected override void InitialiseInternal(TinyIoC.TinyIoCContainer container)
         {
             base.InitialiseInternal(container);
-            var formsAuthConfiguration =
+
+            var formsAuthConfiguration = 
                 new FormsAuthenticationConfiguration()
                 {
-                    Passphrase = "SuperSecretPass",
-                    Salt = "AndVinegarCrisps",
-                    HmacPassphrase = "UberSuperSecure",
-                    RedirectUrl = "/authentication/login",
-                    UsernameMapper = container.Resolve<IUsernameMapper>(),
+                    RedirectUrl = "~/authentication/login",
+                    UserMapper = container.Resolve<IUserMapper>(),
                 };
 
+    
             FormsAuthentication.Enable(this, formsAuthConfiguration);
 
-            BeforeRequest += ctx =>
+            BeforeRequest.AddItemToStartOfPipeline(ctx =>
             {
                 var rootPathProvider =
                     container.Resolve<IRootPathProvider>();
@@ -42,7 +42,7 @@ namespace Org.NerdBeers.Web
                     };
 
                 var requestedExtension =
-                    Path.GetExtension(ctx.Request.Uri);
+                    Path.GetExtension(ctx.Request.Path);
 
                 if (!string.IsNullOrEmpty(requestedExtension))
                 {
@@ -52,7 +52,7 @@ namespace Org.NerdBeers.Web
                     if (staticFileExtensions.Keys.Any(x => x.Equals(extensionWithoutDot, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         var fileName =
-                            Path.GetFileName(ctx.Request.Uri);
+                            Path.GetFileName(ctx.Request.Path);
 
                         if (fileName == null)
                         {
@@ -62,12 +62,12 @@ namespace Org.NerdBeers.Web
                         var filePath =
                             Path.Combine(rootPathProvider.GetRootPath(), "content", fileName);
 
-                        return !File.Exists(filePath) ? null : new StaticFileResponse(filePath, staticFileExtensions[extensionWithoutDot]);
+                        return !File.Exists(filePath) ? null : new Nancy.Responses.GenericFileResponse(filePath);
                     }
                 }
 
                 return null;
-            };
+            });
         }
     }
 }

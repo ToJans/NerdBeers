@@ -1,5 +1,4 @@
 ﻿using System;
-using Nancy.Authentication.Forms;
 using Org.NerdBeers.Web.Models;
 
 namespace Org.NerdBeers.Web.Services

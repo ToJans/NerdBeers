@@ -1,10 +1,9 @@
 ﻿using System;
-using Org.NerdBeers.Web.Services;
 using System.IO;
 using System.Reflection;
-using Simple.Data.Mocking;
 using Nancy.Authentication.Forms;
-using Nancy;
+using Org.NerdBeers.Web.Services;
+using Simple.Data.Mocking;
 
 namespace Org.NerdBeers.Specs.Modules
 {
@@ -16,7 +15,7 @@ namespace Org.NerdBeers.Specs.Modules
         {
             base.ConfigureApplicationContainer(container);
             container.Register<IDBFactory>(fact);
-            container.Register<IUsernameMapper>(new UsernameMapper(fact));
+            container.Register<IUserMapper>(new UserMapper(fact));
         }
 
         public dynamic DB

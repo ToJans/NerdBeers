@@ -1,5 +1,6 @@
 /src/*/*/obj
 /src/*/*/bin
+/src/Org.Nerdbeers/Packages
 _ReSharper.*
 *.csproj.user
 *.resharper.user
