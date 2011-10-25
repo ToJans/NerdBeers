@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Org.NerdBeers.Specs" Label="Org.NerdBeers.Specs" Category="Project" />
+    <Node Id="Machine.Specifications 0.4.24.0" Label="Machine.Specifications 0.4.24.0" Category="Package" />
+    <Node Id="Nancy 0.8.1" Label="Nancy 0.8.1" Category="Package" />
+    <Node Id="Nancy.Authentication.Forms 0.8.1" Label="Nancy.Authentication.Forms 0.8.1" Category="Package" />
+    <Node Id="Nancy.Hosting.Aspnet 0.8.1" Label="Nancy.Hosting.Aspnet 0.8.1" Category="Package" />
+    <Node Id="Nancy.Testing 0.8.1" Label="Nancy.Testing 0.8.1" Category="Package" />
+    <Node Id="Nancy.Viewengines.Spark 0.8.1" Label="Nancy.Viewengines.Spark 0.8.1" Category="Package" />
+    <Node Id="Simple.Data.Ado 0.9.8.2" Label="Simple.Data.Ado 0.9.8.2" Category="Package" />
+    <Node Id="Simple.Data.Core 0.9.8.2" Label="Simple.Data.Core 0.9.8.2" Category="Package" />
+    <Node Id="Simple.Data.Sqlite 0.9.6.3" Label="Simple.Data.Sqlite 0.9.6.3" Category="Package" />
+    <Node Id="Spark 1.5.1" Label="Spark 1.5.1" Category="Package" />
+    <Node Id="System.Data.SQLite 1.0.76.0" Label="System.Data.SQLite 1.0.76.0" Category="Package" />
+    <Node Id="xunit 1.7.0.1540" Label="xunit 1.7.0.1540" Category="Package" />
+    <Node Id="Org.NerdBeers.Web" Label="Org.NerdBeers.Web" Category="Project" />
+    <Node Id="Nancy 0.8.1" Label="Nancy 0.8.1" Category="Package" />
+    <Node Id="Nancy.Authentication.Forms 0.8.1" Label="Nancy.Authentication.Forms 0.8.1" Category="Package" />
+    <Node Id="Nancy.Hosting.Aspnet 0.8.1" Label="Nancy.Hosting.Aspnet 0.8.1" Category="Package" />
+    <Node Id="Nancy.Viewengines.Razor 0.8.1" Label="Nancy.Viewengines.Razor 0.8.1" Category="Package" />
+    <Node Id="Nancy.Viewengines.Spark 0.8.1" Label="Nancy.Viewengines.Spark 0.8.1" Category="Package" />
+    <Node Id="Simple.Data.Ado 0.9.8.2" Label="Simple.Data.Ado 0.9.8.2" Category="Package" />
+    <Node Id="Simple.Data.Core 0.9.8.2" Label="Simple.Data.Core 0.9.8.2" Category="Package" />
+    <Node Id="Simple.Data.SqlCompact40 0.9.8.2" Label="Simple.Data.SqlCompact40 0.9.8.2" Category="Package" />
+    <Node Id="Simple.Data.SqlServer 0.9.8.2" Label="Simple.Data.SqlServer 0.9.8.2" Category="Package" />
+    <Node Id="Spark 1.5.1" Label="Spark 1.5.1" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="Nancy.Authentication.Forms 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Hosting.Aspnet 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Testing 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Testing 0.8.1" Target="xunit 1.7.0.1540" Category="Package Dependency" />
+    <Link Source="Nancy.Viewengines.Spark 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Viewengines.Spark 0.8.1" Target="Spark 1.5.1" Category="Package Dependency" />
+    <Link Source="Simple.Data.Ado 0.9.8.2" Target="Simple.Data.Core 0.9.8.2" Category="Package Dependency" />
+    <Link Source="Simple.Data.Sqlite 0.9.6.3" Target="Simple.Data.Ado 0.9.8.2" Category="Package Dependency" />
+    <Link Source="Simple.Data.Sqlite 0.9.6.3" Target="System.Data.SQLite 1.0.76.0" Category="Package Dependency" />
+    <Link Source="Org.NerdBeers.Specs" Target="Machine.Specifications 0.4.24.0" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Specs" Target="Nancy.Authentication.Forms 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Specs" Target="Nancy.Hosting.Aspnet 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Specs" Target="Nancy.Testing 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Specs" Target="Nancy.Viewengines.Spark 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Specs" Target="Simple.Data.Sqlite 0.9.6.3" Category="Installed Package" />
+    <Link Source="Nancy.Authentication.Forms 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Hosting.Aspnet 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Viewengines.Razor 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Viewengines.Spark 0.8.1" Target="Nancy 0.8.1" Category="Package Dependency" />
+    <Link Source="Nancy.Viewengines.Spark 0.8.1" Target="Spark 1.5.1" Category="Package Dependency" />
+    <Link Source="Simple.Data.Ado 0.9.8.2" Target="Simple.Data.Core 0.9.8.2" Category="Package Dependency" />
+    <Link Source="Simple.Data.SqlCompact40 0.9.8.2" Target="Simple.Data.Ado 0.9.8.2" Category="Package Dependency" />
+    <Link Source="Simple.Data.SqlServer 0.9.8.2" Target="Simple.Data.Ado 0.9.8.2" Category="Package Dependency" />
+    <Link Source="Org.NerdBeers.Web" Target="Nancy.Authentication.Forms 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Web" Target="Nancy.Hosting.Aspnet 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Web" Target="Nancy.Viewengines.Razor 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Web" Target="Nancy.Viewengines.Spark 0.8.1" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Web" Target="Simple.Data.SqlCompact40 0.9.8.2" Category="Installed Package" />
+    <Link Source="Org.NerdBeers.Web" Target="Simple.Data.SqlServer 0.9.8.2" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

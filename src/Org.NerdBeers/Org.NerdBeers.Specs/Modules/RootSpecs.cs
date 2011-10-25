@@ -19,7 +19,7 @@ namespace Org.NerdBeers.Specs.Modules
         It should_display_upcoming_nerdbeers =
             () => bodytext.ShouldContain("Upcoming Nerdbeers");
 
-        It should_display_events_you_registered_for =
-            () => bodytext.ShouldContain("events you subscribed to");
+        //It should_display_events_you_registered_for =
+        //    () => bodytext.ShouldContain("events you subscribed to");
     }
 }

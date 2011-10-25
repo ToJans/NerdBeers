@@ -12,5 +12,6 @@ namespace Org.NerdBeers.Web.Models
         public int EventId { get; set; }
         public string CommentText { get; set; }
         public DateTime Created {get;set;}
+        public Nerd Nerd { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace Org.NerdBeers.Specs.Modules
             });
 
         It should_redirect_to_the_new_nerd =
-            () => result.ShouldHaveRedirectedTo("/BeerEvents/3");
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/single/2");
 
         It should_have_created_the_beerevent_in_the_db = 
             () => ((BeerEvent)DB.BeerEvents.FindByName("TestEvent")).ShouldNotBeNull();
@@ -122,7 +122,7 @@ namespace Org.NerdBeers.Specs.Modules
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
+            () => result.ShouldHaveRedirectedTo("/");
 
         It should_not_have_deleted_the_event =
             () => ((BeerEvent)DB.BeerEvents.FindById(1)).Name.ShouldNotBeNull();
@@ -185,16 +185,22 @@ namespace Org.NerdBeers.Specs.Modules
 
     public class Remove_an_own_comment : with_NerdBeersContext 
     {
-        Because of = () => result = browser.Get("/BeerEvents/comments/delete/1",with => {
-            with.HttpRequest();
-        });
+        static IEnumerable<dynamic> comments;
+
+        Because of = 
+            () => {
+                    result = browser.Get("/BeerEvents/comments/delete/2",with => {
+                    with.HttpRequest();
+                    });
+                    comments = DB.Comments.FindAllByNerdId(2);
+                };
 
         // TODO how to test the redirect url ?
         It should_redirect_to_the_event =
-            () => result.ShouldHaveRedirectedTo("/BeerEvents/1");
+            () => result.ShouldHaveRedirectedTo("/BeerEvents/single/1");
 
         It should_have_removed_the_comment =
-            () => DB.Comments.FindAllByCommentId(1).Count().ShouldEqual(0);
+            () => comments.Any().ShouldBeFalse();
  
     }
     

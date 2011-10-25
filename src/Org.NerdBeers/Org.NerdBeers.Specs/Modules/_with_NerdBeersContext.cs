@@ -3,6 +3,7 @@ using Nancy.Session;
 using Nancy.Testing;
 using System;
 using Nancy;
+using Org.NerdBeers.Web.Models;
 
 namespace Org.NerdBeers.Specs.Modules
 {
@@ -23,19 +24,23 @@ namespace Org.NerdBeers.Specs.Modules
             bs = new SpecBootStrapper();
             CookieBasedSessions.Enable(bs);
             bs.Initialise();
+            DB = bs.fact.DB();
             browser = new Browser(bs);
+            GenerateTestData();
+
         }
 
         protected static void GenerateTestData()
         {
             // insert testdata
-            int NerdId = (int)DB.Nerds.Insert(Guid: "xxx", Name: "Tom").Id;
-            int EventId = (int)DB.BeerEvents.Insert(Name: "First nerdbeer event", EventDate: RefDate, Location: "Everywhere").Id;
-            DB.NerdSubscriptions.Insert(EventId: EventId, NerdId: NerdId);
-            DB.Comments.Insert(EventId: EventId, NerdId: NerdId, CommentText: "Hakuna matata", Created: RefDate.AddHours(1));
+            Nerd n = DB.Nerds.Insert(Guid: "xxx", Name: "Tom",Id:1);
+            BeerEvent e = DB.BeerEvents.Insert(Name: "First nerdbeer event", EventDate: RefDate, Location: "Everywhere",Id:1);
+            DB.NerdSubscriptions.Insert(EventId: e.Id, NerdId: n.Id);
+            DB.Comments.Insert(EventId: e.Id, NerdId: n.Id, CommentText: "Hakuna matata", Created: RefDate.AddHours(1));
+            DB.Comments.Insert(EventId: e.Id, NerdId: 2, CommentText: "Hakuna matata 2", Created: RefDate.AddHours(1));
         }
 
-        Cleanup after = () => bs.Dispose();
+        Cleanup after = () => bs.fact.Dispose();
 
     }
 

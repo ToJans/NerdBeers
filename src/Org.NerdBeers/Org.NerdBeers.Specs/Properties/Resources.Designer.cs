@@ -66,7 +66,19 @@ namespace Org.NerdBeers.Specs.Properties {
         ///, [Name] nvarchar(255) NOT NULL
         ///, [Location] nvarchar(1023) NOT NULL
         ///, [EventDate] datetime NOT NULL
-        ///);.
+        ///);
+        ///
+        ///CREATE TABLE [Comments] (
+        ///  [Id] integer NOT NULL primary key autoincrement
+        ///, [NerdId] integer NOT NULL
+        ///, [EventId] integer NOT NULL
+        ///, [CommentText] nvarchar(3000) NOT NULL
+        ///, [Created] datetime NOT NULL
+        ///, FOREIGN KEY([NerdId]) REFERENCES [Nerds]([Id])
+        ///, FOREIGN KEY([EventId]) REFERENCES BeerEvents([Id])
+        ///);
+        ///
+        ///CR [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CreateSqliteDML {
             get {

@@ -18,12 +18,25 @@ namespace Org.NerdBeers.Web.Modules
             Get["/single/{Id}"] = x =>
             {
                 int id = x.Id;
-                List<dynamic> subscribedNerds = DB.Nerds.FindAll(DB.Nerds.NerdSubscriptions.EventId == id).ToList(); 
+                List<dynamic> nerdssubscriptions = DB.NerdSubscriptions.FindAllByEventId(id).ToList();
+                List<Nerd> subscribedNerds = new List<Nerd>();
+                if (nerdssubscriptions.Count > 0)
+                {
+                    subscribedNerds = DB.Nerds.FindAllById(nerdssubscriptions.Select(y=>(int)y.NerdId).ToArray()).ToList<Nerd>();
+                }
                 Model.BeerEvent = DB.BeerEvents.FindById(id);
                 Model.Subscribers = subscribedNerds;
                 Model.CanSubscribe = !subscribedNerds.Any(n=>n.Guid == Model.Nerd.Guid);
                 Model.CanEdit = !subscribedNerds.Any();
-                Model.Comments = DB.Comments.FindAllByEventId(id);
+                List<Comment> comments =DB.Comments.FindAllByEventId(id).ToList<Comment>();
+                List<Nerd> commentnerds =new List<Nerd>();
+                if (comments.Count>0)
+                {
+                    commentnerds = DB.Nerds.FindAllById(comments.Select(y => y.NerdId).ToArray()).ToList<Nerd>();
+                }
+                foreach (var cmt in comments)
+                    cmt.Nerd = commentnerds.Where(y => y.Id == cmt.NerdId).FirstOrDefault();
+                Model.Comments = comments;
                 return View["beerevents_detail",Model];
             };
 

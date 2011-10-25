@@ -45,7 +45,16 @@ namespace Org.NerdBeers.Web.Modules
                     .OrderBy(DB.BeerEvents.EventDate).Take(10).ToList();
                 Model.UpcomingEvents = ube;
                 Model.HasUpcoming = ube.Count>0;
-                var subscriptions = DB.BeerEvents.FindAll(DB.BeerEvents.NerdSubscriptions.Nerds.Guid == Model.Nerd.Guid);
+                List<int> subscr = DB.NerdSubscriptions
+                    .Query()
+                    .Select(DB.NerdSubscriptions.EventId)
+                    .Where(DB.NerdSubscriptions.NerdId == Model.Nerd.Id)
+                    .ToScalarList<int>();
+                List<BeerEvent> subscriptions  = new List<BeerEvent>();
+                if (subscr.Count>0)
+                {
+                    subscriptions  = DB.BeerEvents.FindAllById(subscr.ToArray()).ToList();
+                }
                 Model.SubscribedEvents = subscriptions;
                 Model.HasSubscriptions = subscriptions.Any();
 
@@ -58,7 +67,7 @@ namespace Org.NerdBeers.Web.Modules
         }
 
         // Route helper
-        protected dynamic RedirectToBeerEvent(int id)
+        protected dynamic RedirectToBeerEvent(long id)
         {
             return Response.AsRedirect("/BeerEvents/single/" + id.ToString());
         }

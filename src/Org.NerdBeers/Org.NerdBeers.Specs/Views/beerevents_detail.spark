@@ -58,7 +58,7 @@
       <li>
         <h5>Add comment</h5>
         <form method="POST" action="/BeerEvents/${m.BeerEvent.Id}/comments/create">
-          <textarea name="Comment"></textarea>
+          <textarea name="CommentText"></textarea>
           <input type="submit"/>
         </form>
       </li>
